@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل أدوات الذكاء الاصطناعي المجانية</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            padding: 60px 0;
+            position: relative;
+            background: rgba(0,0,0,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-50px); }
+            100% { transform: translateX(50px); }
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #fff, #e0e6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg) translateX(-100%); }
+            100% { transform: rotate(0deg) translateX(100%); }
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 30px;
+        }
+
+        .tool-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .tool-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .tool-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-description {
+            color: #5a6c7d;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .tool-badge {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            margin-top: 50px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .section-header {
+                font-size: 1.5rem;
+                padding: 20px;
+            }
+
+            .tool-card {
+                padding: 20px;
+            }
+
+            .tool-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .tools-grid {
+                padding: 15px;
+            }
+        }
+
+        /* Loading Animation */
+        .tool-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .tool-card:nth-child(1) { animation-delay: 0.1s; }
+        .tool-card:nth-child(2) { animation-delay: 0.2s; }
+        .tool-card:nth-child(3) { animation-delay: 0.3s; }
+        .tool-card:nth-child(4) { animation-delay: 0.4s; }
+        .tool-card:nth-child(5) { animation-delay: 0.5s; }
+        .tool-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-robot"></i> دليل أدوات الذكاء الاصطناعي</h1>
+            <p><i class="fas fa-star"></i> اكتشف أفضل الأدوات والتطبيقات المجانية في عالم الذكاء الاصطناعي <i class="fas fa-star"></i></p>
+        </header>
+
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-globe"></i> مواقع الذكاء الاصطناعي
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fab fa-openai"></i></div>
+                    <div class="tool-name">ChatGPT <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">روبوت محادثة ذكي يساعد في الكتابة والإجابة على الأسئلة والبرمجة</div>
+                    <a href="https://chat.openai.com" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fab fa-google"></i></div>
+                    <div class="tool-name">Google Bard <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مساعد ذكي من جوجل يقدم إجابات مفصلة ومفيدة باللغة العربية</div>
+                    <a href="https://bard.google.com" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-brain"></i></div>
+                    <div class="tool-name">Hugging Face <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">منصة مفتوحة المصدر لنماذج التعلم الآلي والذكاء الاصطناعي</div>
+                    <a href="https://huggingface.co" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-code"></i></div>
+                    <div class="tool-name">Replit AI <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مساعد برمجة ذكي يساعد في كتابة وتشغيل الأكواد</div>
+                    <a href="https://replit.com/ai" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="tool-name">Claude <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">روبوت محادثة متقدم يركز على السلامة والمساعدة الأخلاقية</div>
+                    <a href="https://claude.ai" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-search"></i></div>
+                    <div class="tool-name">Perplexity AI <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">محرك بحث ذكي يقدم إجابات مباشرة مع مصادر موثوقة</div>
+                    <a href="https://www.perplexity.ai" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-palette"></i></div>
+                    <div class="tool-name">Midjourney <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">أداة توليد الصور بالذكاء الاصطناعي عبر Discord</div>
+                    <a href="https://www.midjourney.com" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fab fa-microsoft"></i></div>
+                    <div class="tool-name">Microsoft Copilot <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مساعد ذكي متكامل من مايكروسوفت للبحث والإنتاجية</div>
+                    <a href="https://www.microsoft.com/en-us/microsoft-copilot" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
+                    <div class="tool-name">DALL-E <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مولد صور ذكي من OpenAI يحول النصوص إلى صور مذهلة</div>
+                    <a href="https://labs.openai.com" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-language"></i></div>
+                    <div class="tool-name">DeepL Translate <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مترجم ذكي يوفر ترجمات دقيقة وطبيعية للغات متعددة</div>
+                    <a href="https://www.deepl.com" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-music"></i></div>
+                    <div class="tool-name">AIVA <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مولد موسيقى بالذكاء الاصطناعي للاستخدام التجاري والشخصي</div>
+                    <a href="https://www.aiva.ai" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-video"></i></div>
+                    <div class="tool-name">Runway ML <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">أدوات ذكاء اصطناعي لتحرير الفيديو والتأثيرات البصرية</div>
+                    <a href="https://runwayml.com" class="tool-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <i class="fas fa-desktop"></i> برامج كومبيوتر للذكاء الاصطناعي
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-broadcast-tower"></i></div>
+                    <div class="tool-name">OBS Studio <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">برنامج تسجيل وتدفق فيديو مجاني مع إمكانيات متقدمة</div>
+                    <a href="https://obsproject.com" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل البرنامج
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-microphone"></i></div>
+                    <div class="tool-name">Audacity <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">محرر صوت مجاني ومفتوح المصدر لتسجيل وتحرير الملفات الصوتية</div>
+                    <a href="https://www.audacityteam.org" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل البرنامج
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-paint-brush"></i></div>
+                    <div class="tool-name">GIMP <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">بديل مجاني لفوتوشوب لتحرير الصور والتصميم الجرافيكي</div>
+                    <a href="https://www.gimp.org" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل البرنامج
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-vector-square"></i></div>
+                    <div class="tool-name">Inkscape <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">برنامج رسم متجهي مجاني لإنشاء الرسوم التوضيحية والشعارات</div>
+                    <a href="https://inkscape.org" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل البرنامج
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-cube"></i></div>
+                    <div class="tool-name">Blender <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">برنامج تصميم ثلاثي الأبعاد مجاني للنمذجة والرسوم المتحركة</div>
+                    <a href="https://www.blender.org" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل البرنامج
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-code"></i></div>
+                    <div class="tool-name">VS Code <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">محرر نصوص متقدم مع إضافات الذكاء الاصطناعي للبرمجة</div>
+                    <a href="https://code.visualstudio.com" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل البرنامج
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-database"></i></div>
+                    <div class="tool-name">TensorFlow <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مكتبة برمجة مفتوحة المصدر لتطوير نماذج التعلم الآلي</div>
+                    <a href="https://www.tensorflow.org" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل المكتبة
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                    <div class="tool-name">PyTorch <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">إطار عمل تعلم آلي مفتوح المصدر من فيسبوك للبحث والإنتاج</div>
+                    <a href="https://pytorch.org" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل الإطار
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-terminal"></i></div>
+                    <div class="tool-name">Anaconda <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">منصة شاملة لعلوم البيانات والتعلم الآلي مع Python</div>
+                    <a href="https://www.anaconda.com" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل المنصة
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="tool-name">KNIME <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">منصة مفتوحة المصدر لتحليل البيانات والتعلم الآلي</div>
+                    <a href="https://www.knime.com" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل المنصة
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="tool-name">Weka <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مجموعة أدوات للتعلم الآلي وتعدين البيانات</div>
+                    <a href="https://www.cs.waikato.ac.nz/ml/weka" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل الأدوات
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-flask"></i></div>
+                    <div class="tool-name">Orange <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">برنامج للتعلم الآلي وتحليل البيانات بالسحب والإفلات</div>
+                    <a href="https://orange.biolab.si" class="tool-link" target="_blank">
+                        <i class="fas fa-download"></i> تحميل البرنامج
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <i class="fab fa-android"></i> تطبيقات أندرويد للذكاء الاصطناعي
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-assistant"></i></div>
+                    <div class="tool-name">Google Assistant <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مساعد جوجل الذكي للهواتف الأندرويد مع إمكانيات متقدمة</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.googleassistant" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
+                    <div class="tool-name">Microsoft SwiftKey <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">لوحة مفاتيح ذكية مع تنبؤات النصوص والترجمة</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.touchtype.swiftkey" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
+                    <div class="tool-name">FaceApp <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق تحرير الصور بالذكاء الاصطناعي لتغيير الملامح</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.faceapp" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-palette"></i></div>
+                    <div class="tool-name">Prisma <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق تحويل الصور إلى لوحات فنية باستخدام الذكاء الاصطناعي</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.neuralprisma" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-magic"></i></div>
+                    <div class="tool-name">YouCam Makeup <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق مكياج افتراضي بالذكاء الاصطناعي</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.cyberlink.youcam" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
+                    <div class="tool-name">Snapseed <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">محرر صور احترافي من جوجل مع أدوات ذكاء اصطناعي</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.niksoftware.snapseed" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-language"></i></div>
+                    <div class="tool-name">Google Translate <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مترجم فوري بالذكاء الاصطناعي لأكثر من 100 لغة</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.translate" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-music"></i></div>
+                    <div class="tool-name">Musicolet <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مشغل موسيقى ذكي مع تنظيم تلقائي للمكتبة الموسيقية</div>
+                    <a href="https://play.google.com/store/apps/details?id=in.krosbits.musicolet" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-video"></i></div>
+                    <div class="tool-name">CapCut <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">محرر فيديو احترافي مع تأثيرات ذكاء اصطناعي</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.lemon.lvoverseas" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-brain"></i></div>
+                    <div class="tool-name">Replicate AI <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق لتشغيل نماذج الذكاء الاصطناعي على الهاتف</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.replicate.app" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-search"></i></div>
+                    <div class="tool-name">Bing AI <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مساعد بحث ذكي من مايكروسوفت مع إجابات فورية</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.microsoft.bing" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-pen"></i></div>
+                    <div class="tool-name">Canva <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">أداة تصميم جرافيكي مع قوالب ذكاء اصطناعي</div>
+                    <a href="https://play.google.com/store/apps/details?id=com.canva.editor" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <i class="fab fa-apple"></i> تطبيقات آيفون للذكاء الاصطناعي
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-assistant"></i></div>
+                    <div class="tool-name">Siri <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مساعد آبل الشخصي الذكي المدمج في أجهزة آيفون</div>
+                    <a href="https://www.apple.com/siri/" class="tool-link" target="_blank">
+                        <i class="fas fa-info-circle"></i> زيارة الموقع
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fab fa-openai"></i></div>
+                    <div class="tool-name">ChatGPT App <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق شات جي بي تي الرسمي لأجهزة آيفون وآيباد</div>
+                    <a href="https://apps.apple.com/app/chatgpt/id6448311069" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
+                    <div class="tool-name">FaceApp <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق تحرير الصور بالذكاء الاصطناعي لأجهزة iOS</div>
+                    <a href="https://apps.apple.com/app/faceapp-ai-face-editor/id1180884341" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-palette"></i></div>
+                    <div class="tool-name">Prisma <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق تحويل الصور إلى فن باستخدام الذكاء الاصطناعي</div>
+                    <a href="https://apps.apple.com/app/prisma-photo-editor/id1122649982" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-magic"></i></div>
+                    <div class="tool-name">YouCam Makeup <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق مكياج افتراضي بالذكاء الاصطناعي لأجهزة iOS</div>
+                    <a href="https://apps.apple.com/app/youcam-makeup/id863844475" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-language"></i></div>
+                    <div class="tool-name">DeepL Translate <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مترجم ذكي احترافي لترجمة النصوص والمستندات</div>
+                    <a href="https://apps.apple.com/app/deepl-translate/id1558385612" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
+                    <div class="tool-name">Halide <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">كاميرا احترافية مع أوضاع ذكاء اصطناعي متقدمة</div>
+                    <a href="https://apps.apple.com/app/halide-mark-ii/id885697368" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-music"></i></div>
+                    <div class="tool-name">AIVA <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مولد موسيقى بالذكاء الاصطناعي للهواتف المحمولة</div>
+                    <a href="https://apps.apple.com/app/aiva-ai-music/id1500714467" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fab fa-microsoft"></i></div>
+                    <div class="tool-name">Microsoft Copilot <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">مساعد ذكي من مايكروسوفت لأجهزة آيفون</div>
+                    <a href="https://apps.apple.com/app/microsoft-copilot/id6472538444" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-brain"></i></div>
+                    <div class="tool-name">Replicate AI <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">تطبيق تشغيل نماذج الذكاء الاصطناعي على آيفون</div>
+                    <a href="https://apps.apple.com/app/replicate-ai/id6446047912" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-search"></i></div>
+                    <div class="tool-name">Perplexity AI <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">محرك بحث ذكي مع إجابات فورية لأجهزة iOS</div>
+                    <a href="https://apps.apple.com/app/perplexity-ask-anything/id1668000334" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-pen"></i></div>
+                    <div class="tool-name">Canva <span class="tool-badge">مجاني</span></div>
+                    <div class="tool-description">أداة تصميم احترافية مع ميزات الذكاء الاصطناعي</div>
+                    <a href="https://apps.apple.com/app/canva-design-photo-video/id897446215" class="tool-link" target="_blank">
+                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p><i class="fas fa-heart"></i> صنع بكل حب لمجتمع الذكاء الاصطناعي العربي <i class="fas fa-heart"></i></p>
+        <p>&copy; 2024 دليل أدوات الذكاء الاصطناعي المجانية. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>
