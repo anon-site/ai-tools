@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل أدوات الذكاء الاصطناعي المجانية</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>AI Tools Hub - أفضل أدوات الذكاء الاصطناعي المجانية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #6366f1;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        .dark-theme {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #6366f1;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+        }
+
+        .light-theme {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-primary: #7c3aed;
+            --accent-secondary: #4f46e5;
+            --card-bg: #ffffff;
+            --border-color: #cbd5e1;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,730 +52,1567 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
-            max-width: 1400px;
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
+            padding: 0 20px;
         }
 
         /* Header Styles */
         header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-            padding: 60px 0;
-            position: relative;
-            background: rgba(0,0,0,0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            background-color: var(--bg-secondary);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        header::before {
-            content: '';
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--accent-primary);
+            background-color: var(--bg-tertiary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-card ul {
+            list-style: none;
+        }
+
+        .category-card li {
+            margin-bottom: 1.2rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tool-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .tool-link:hover {
+            color: var(--accent-primary);
+        }
+
+        .tool-title {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .platform-badge {
+            background-color: var(--accent-secondary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .tool-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+        }
+
+        /* Floating Settings Button */
+        .floating-settings {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-settings:hover {
+            transform: scale(1.1);
+        }
+
+        .settings-modal {
+            position: fixed;
+            bottom: 8rem;
+            right: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            min-width: 250px;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+
+        .settings-modal.active {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .settings-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
+        }
+
+        .theme-toggle, .language-toggle {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
             position: absolute;
+            cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: 50px 50px;
-            animation: float 20s infinite linear;
-            pointer-events: none;
+            background-color: var(--border-color);
+            transition: .4s;
+            border-radius: 24px;
         }
 
-        @keyframes float {
-            0% { transform: translateX(-50px); }
-            100% { transform: translateX(50px); }
-        }
-
-        header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            background: linear-gradient(45deg, #fff, #e0e6ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-
-        header p {
-            font-size: 1.4rem;
-            opacity: 0.95;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-        }
-
-        /* Section Styles */
-        .section {
-            background: rgba(255, 255, 255, 0.95);
-            margin-bottom: 40px;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            position: relative;
-        }
-
-        .section::before {
-            content: '';
+        .slider:before {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
-            background-size: 400% 400%;
-            animation: gradient 3s ease infinite;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        input:checked + .slider {
+            background-color: var(--accent-primary);
         }
 
-        .section-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px 30px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
+        input:checked + .slider:before {
+            transform: translateX(26px);
         }
 
-        .section-header::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(0deg) translateX(-100%); }
-            100% { transform: rotate(0deg) translateX(100%); }
-        }
-
-        /* Tools Grid */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            padding: 30px;
-        }
-
-        .tool-card {
-            background: linear-gradient(145deg, #ffffff, #f8f9fa);
-            border-radius: 20px;
-            padding: 25px;
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border-color: rgba(102, 126, 234, 0.3);
-        }
-
-        .tool-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .tool-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 15px;
+        .language-options {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            color: white;
-            font-size: 24px;
+            gap: 0.5rem;
         }
 
-        .tool-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .language-btn {
+            padding: 0.5rem 0.8rem;
+            background-color: var(--bg-tertiary);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
         }
 
-        .tool-description {
-            color: #5a6c7d;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-
-        .tool-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .tool-badge {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 10px;
+        .language-btn:hover, .language-btn.active {
+            background-color: var(--accent-primary);
         }
 
         /* Footer */
         footer {
+            background-color: var(--bg-secondary);
+            padding: 2rem 0;
             text-align: center;
-            color: white;
-            padding: 40px;
-            margin-top: 50px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: var(--text-secondary);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--bg-secondary);
+                width: 250px;
+                height: calc(100vh - 70px);
+                padding: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
             }
 
-            header p {
-                font-size: 1.1rem;
+            .nav-menu.active {
+                right: 0;
             }
 
-            .tools-grid {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .categories-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px;
             }
 
-            .section-header {
-                font-size: 1.5rem;
-                padding: 20px;
-            }
-
-            .tool-card {
-                padding: 20px;
-            }
-
-            .tool-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
+            .floating-settings, .settings-modal {
+                right: 1rem;
             }
         }
 
         @media (max-width: 480px) {
-            header h1 {
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
                 font-size: 2rem;
             }
-
-            .container {
-                padding: 15px;
+            
+            .category-card {
+                padding: 1.5rem;
             }
-
-            .tools-grid {
-                padding: 15px;
-            }
-        }
-
-        /* Loading Animation */
-        .tool-card {
-            animation: fadeInUp 0.6s ease forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .tool-card:nth-child(1) { animation-delay: 0.1s; }
-        .tool-card:nth-child(2) { animation-delay: 0.2s; }
-        .tool-card:nth-child(3) { animation-delay: 0.3s; }
-        .tool-card:nth-child(4) { animation-delay: 0.4s; }
-        .tool-card:nth-child(5) { animation-delay: 0.5s; }
-        .tool-card:nth-child(6) { animation-delay: 0.6s; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .nav-menu a {
+                white-space: normal;
+                text-align: right;
             }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-robot"></i> دليل أدوات الذكاء الاصطناعي</h1>
-            <p><i class="fas fa-star"></i> اكتشف أفضل الأدوات والتطبيقات المجانية في عالم الذكاء الاصطناعي <i class="fas fa-star"></i></p>
-        </header>
+<body class="dark-theme">
+    <header>
+        <div class="container header-content">
+            <div class="logo" id="siteTitle">AI Tools Hub</div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#ai-websites" class="active" data-section="ai-websites">مواقع الذكاء الاصطناعي</a></li>
+                <li><a href="#creative-tools" data-section="creative-tools">أدوات إبداعية</a></li>
+                <li><a href="#developer-tools" data-section="developer-tools">أدوات المطورين</a></li>
+                <li><a href="#windows-apps" data-section="windows-apps">برامج ويندوز</a></li>
+                <li><a href="#mobile-apps" data-section="mobile-apps">تطبيقات الموبايل</a></li>
+            </ul>
+        </div>
+    </header>
 
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-globe"></i> مواقع الذكاء الاصطناعي
-            </div>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fab fa-openai"></i></div>
-                    <div class="tool-name">ChatGPT <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">روبوت محادثة ذكي يساعد في الكتابة والإجابة على الأسئلة والبرمجة</div>
-                    <a href="https://chat.openai.com" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
+    <section class="hero">
+        <div class="container">
+            <h1 id="heroTitle">أكثر من 200 أداة ذكاء اصطناعي مجانية</h1>
+            <p id="heroSubtitle">اكتشف أضخم تجميعة لأفضل أدوات الذكاء الاصطناعي من جميع أنحاء العالم، مجانية بالكامل ومتاحة للجميع</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label" id="statTools">أدوات</div>
                 </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fab fa-google"></i></div>
-                    <div class="tool-name">Google Bard <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مساعد ذكي من جوجل يقدم إجابات مفصلة ومفيدة باللغة العربية</div>
-                    <a href="https://bard.google.com" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label" id="statCountries">دولة</div>
                 </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-brain"></i></div>
-                    <div class="tool-name">Hugging Face <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">منصة مفتوحة المصدر لنماذج التعلم الآلي والذكاء الاصطناعي</div>
-                    <a href="https://huggingface.co" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-code"></i></div>
-                    <div class="tool-name">Replit AI <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مساعد برمجة ذكي يساعد في كتابة وتشغيل الأكواد</div>
-                    <a href="https://replit.com/ai" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-user-tie"></i></div>
-                    <div class="tool-name">Claude <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">روبوت محادثة متقدم يركز على السلامة والمساعدة الأخلاقية</div>
-                    <a href="https://claude.ai" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-search"></i></div>
-                    <div class="tool-name">Perplexity AI <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">محرك بحث ذكي يقدم إجابات مباشرة مع مصادر موثوقة</div>
-                    <a href="https://www.perplexity.ai" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-palette"></i></div>
-                    <div class="tool-name">Midjourney <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">أداة توليد الصور بالذكاء الاصطناعي عبر Discord</div>
-                    <a href="https://www.midjourney.com" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fab fa-microsoft"></i></div>
-                    <div class="tool-name">Microsoft Copilot <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مساعد ذكي متكامل من مايكروسوفت للبحث والإنتاجية</div>
-                    <a href="https://www.microsoft.com/en-us/microsoft-copilot" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
-                    <div class="tool-name">DALL-E <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مولد صور ذكي من OpenAI يحول النصوص إلى صور مذهلة</div>
-                    <a href="https://labs.openai.com" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-language"></i></div>
-                    <div class="tool-name">DeepL Translate <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مترجم ذكي يوفر ترجمات دقيقة وطبيعية للغات متعددة</div>
-                    <a href="https://www.deepl.com" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-music"></i></div>
-                    <div class="tool-name">AIVA <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مولد موسيقى بالذكاء الاصطناعي للاستخدام التجاري والشخصي</div>
-                    <a href="https://www.aiva.ai" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-video"></i></div>
-                    <div class="tool-name">Runway ML <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">أدوات ذكاء اصطناعي لتحرير الفيديو والتأثيرات البصرية</div>
-                    <a href="https://runwayml.com" class="tool-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> زيارة الموقع
-                    </a>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label" id="statFree">مجاني</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-desktop"></i> برامج كومبيوتر للذكاء الاصطناعي
+    <section class="categories" id="ai-websites">
+        <div class="container">
+            <h2 class="section-title" id="aiWebsitesTitle">مواقع الذكاء الاصطناعي العالمية</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <h3><i class="fas fa-globe"></i> <span id="majorCompanies">شركات كبرى</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://chat.openai.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>ChatGPT - OpenAI</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="chatgptDesc">أقوى نموذج لغوي في العالم، يجيب على الأسئلة، يكتب النصوص، ويحل المشكلات البرمجية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bard.google.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Google Gemini</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="geminiDesc">مساعد ذكي من جوجل يدمج مع خدمات جوجل الأخرى، يدعم الصور والمستندات</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://copilot.microsoft.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Microsoft Copilot</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="copilotDesc">مساعد ذكي متكامل مع نظام ويندوز وتطبيقات مايكروسوفت، مجاني بالكامل</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://claude.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Claude - Anthropic</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="claudeDesc">نموذج لغوي متقدم يركز على السلامة والموثوقية، يدعم ملفات كبيرة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://perplexity.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Perplexity AI</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="perplexityDesc">محرك بحث ذكي يجمع بين الذكاء الاصطناعي ونتائج البحث الحقيقية مع مصادر موثوقة</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3><i class="fas fa-robot"></i> <span id="specializedTools">أدوات متخصصة</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://midjourney.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Midjourney</span>
+                                    <span class="platform-badge">Discord</span>
+                                </div>
+                                <div class="tool-description" id="midjourneyDesc">أفضل أداة لتوليد الصور الفنية باستخدام الذكاء الاصطناعي، تعمل عبر منصة Discord</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://stability.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Stable Diffusion</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="stablediffusionDesc">نموذج مفتوح المصدر لتوليد الصور من النصوص، متاح مجاناً عبر الويب</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://runwayml.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Runway ML</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="runwaymlDesc">منصة متقدمة لإنشاء وتحرير الفيديو باستخدام الذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://elevenlabs.io" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>ElevenLabs</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="elevenlabsDesc">أفضل أداة لتحويل النص إلى كلام طبيعي، تدعم لغات متعددة بما فيها العربية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://synthesia.io" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Synthesia</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="synthesiaDesc">إنشاء مقاطع فيديو احترافية باستخدام أفاتار ذكية بدون الحاجة للكاميرا</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3><i class="fas fa-language"></i> <span id="writingTranslation">كتابة وترجمة</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://deepl.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>DeepL Translator</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="deeplDesc">أفضل أداة ترجمة في العالم، تدعم العربية والإنجليزية ولغات متعددة بدقة عالية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://grammarly.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Grammarly</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="grammarlyDesc">أداة تدقيق لغوي متقدمة تساعد على تحسين الكتابة باللغة الإنجليزية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://hemingwayapp.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Hemingway Editor</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="hemingwayDesc">محرر يساعد على جعل النصوص أكثر وضوحاً وبساطة، مثالي للكتابة الاحترافية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://copy.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Copy.ai</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="copyaiDesc">أداة لإنشاء المحتوى التسويقي، الإعلانات، والنصوص الإبداعية تلقائياً</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://rytr.me" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Rytr</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="rytrDesc">منصة مجانية لإنشاء المحتوى بلغات متعددة، تدعم أكثر من 40 نموذجاً مختلفاً</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-broadcast-tower"></i></div>
-                    <div class="tool-name">OBS Studio <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">برنامج تسجيل وتدفق فيديو مجاني مع إمكانيات متقدمة</div>
-                    <a href="https://obsproject.com" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل البرنامج
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-microphone"></i></div>
-                    <div class="tool-name">Audacity <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">محرر صوت مجاني ومفتوح المصدر لتسجيل وتحرير الملفات الصوتية</div>
-                    <a href="https://www.audacityteam.org" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل البرنامج
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-paint-brush"></i></div>
-                    <div class="tool-name">GIMP <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">بديل مجاني لفوتوشوب لتحرير الصور والتصميم الجرافيكي</div>
-                    <a href="https://www.gimp.org" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل البرنامج
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-vector-square"></i></div>
-                    <div class="tool-name">Inkscape <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">برنامج رسم متجهي مجاني لإنشاء الرسوم التوضيحية والشعارات</div>
-                    <a href="https://inkscape.org" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل البرنامج
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-cube"></i></div>
-                    <div class="tool-name">Blender <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">برنامج تصميم ثلاثي الأبعاد مجاني للنمذجة والرسوم المتحركة</div>
-                    <a href="https://www.blender.org" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل البرنامج
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-code"></i></div>
-                    <div class="tool-name">VS Code <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">محرر نصوص متقدم مع إضافات الذكاء الاصطناعي للبرمجة</div>
-                    <a href="https://code.visualstudio.com" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل البرنامج
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-database"></i></div>
-                    <div class="tool-name">TensorFlow <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مكتبة برمجة مفتوحة المصدر لتطوير نماذج التعلم الآلي</div>
-                    <a href="https://www.tensorflow.org" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل المكتبة
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-robot"></i></div>
-                    <div class="tool-name">PyTorch <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">إطار عمل تعلم آلي مفتوح المصدر من فيسبوك للبحث والإنتاج</div>
-                    <a href="https://pytorch.org" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل الإطار
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-terminal"></i></div>
-                    <div class="tool-name">Anaconda <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">منصة شاملة لعلوم البيانات والتعلم الآلي مع Python</div>
-                    <a href="https://www.anaconda.com" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل المنصة
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
-                    <div class="tool-name">KNIME <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">منصة مفتوحة المصدر لتحليل البيانات والتعلم الآلي</div>
-                    <a href="https://www.knime.com" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل المنصة
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-network-wired"></i></div>
-                    <div class="tool-name">Weka <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مجموعة أدوات للتعلم الآلي وتعدين البيانات</div>
-                    <a href="https://www.cs.waikato.ac.nz/ml/weka" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل الأدوات
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-flask"></i></div>
-                    <div class="tool-name">Orange <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">برنامج للتعلم الآلي وتحليل البيانات بالسحب والإفلات</div>
-                    <a href="https://orange.biolab.si" class="tool-link" target="_blank">
-                        <i class="fas fa-download"></i> تحميل البرنامج
-                    </a>
-                </div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="section">
-            <div class="section-header">
-                <i class="fab fa-android"></i> تطبيقات أندرويد للذكاء الاصطناعي
+    <section class="categories" id="creative-tools">
+        <div class="container">
+            <h2 class="section-title" id="creativeToolsTitle">أدوات إبداعية وتصميم</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <h3><i class="fas fa-paint-brush"></i> <span id="imageGeneration">توليد الصور</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://leonardo.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Leonardo.ai</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="leonardoDesc">منصة متقدمة لتوليد الصور الفنية باستخدام نماذج مخصصة، تقدم 150 صورة يومياً مجاناً</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dreamstudio.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>DreamStudio</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="dreamstudioDesc">واجهة رسمية لـ Stable Diffusion، تقدم 25 صورة مجانية عند التسجيل</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://artbreeder.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Artbreeder</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="artbreederDesc">أداة لخلط وتعديل الصور باستخدام الذكاء الاصطناعي، مثالية للفنانين الرقميين</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://nightcafe.studio" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>NightCafe</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="nightcafeDesc">منصة لتوليد الصور الفنية بأساليب مختلفة، تقدم رصيداً يومياً مجانياً</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://craiyon.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Craiyon</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="craiyonDesc">أداة مجانية بالكامل لتوليد الصور من النصوص، سابقاً تعرف باسم DALL-E Mini</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3><i class="fas fa-video"></i> <span id="videoGeneration">توليد الفيديو</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://pika.art" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Pika Labs</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="pikaDesc">أداة مجانية لإنشاء مقاطع فيديو قصيرة من النصوص أو الصور، تعمل عبر Discord</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://kaiber.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Kaiber</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="kaiberDesc">منصة لإنشاء الفيديوهات الموسيقية والفنية باستخدام الذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://heygen.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>HeyGen</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="heygenDesc">إنشاء مقاطع فيديو احترافية باستخدام أفاتار ذكية تتحدث بأكثر من 40 لغة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pictory.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Pictory</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="pictoryDesc">تحويل النصوص والمقالات إلى مقاطع فيديو تلقائياً، مثالي للمحتوى التعليمي</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://invideo.io" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>InVideo</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="invideoDesc">منصة شاملة لإنشاء وتحرير الفيديو باستخدام القوالب الجاهزة والذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3><i class="fas fa-music"></i> <span id="musicAudio">الموسيقى والصوت</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://soundraw.io" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Soundraw</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="soundrawDesc">إنشاء موسيقى خلفية أصلية باستخدام الذكاء الاصطناعي، خالية من حقوق الملكية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://boomy.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Boomy</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="boomyDesc">إنشاء أغاني كاملة في ثوانٍ، مع إمكانية نشرها على منصات الموسيقى العالمية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://mubert.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Mubert</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="mubertDesc">موسيقى خلفية لا نهائية تم إنشاؤها بواسطة الذكاء الاصطناعي، مثالية للبث المباشر</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://descript.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Descript</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="descriptDesc">محرر فيديو وصوت متقدم يسمح بتحرير الصوت كنص، مع ميزات Overdub الصوتية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://podcastle.ai" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Podcastle</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="podcastleDesc">منصة متكاملة لإنشاء البودكاست باستخدام الذكاء الاصطناعي، مع تحرير صوتي متقدم</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-assistant"></i></div>
-                    <div class="tool-name">Google Assistant <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مساعد جوجل الذكي للهواتف الأندرويد مع إمكانيات متقدمة</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.googleassistant" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
-                    <div class="tool-name">Microsoft SwiftKey <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">لوحة مفاتيح ذكية مع تنبؤات النصوص والترجمة</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.touchtype.swiftkey" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
-                    <div class="tool-name">FaceApp <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق تحرير الصور بالذكاء الاصطناعي لتغيير الملامح</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.faceapp" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-palette"></i></div>
-                    <div class="tool-name">Prisma <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق تحويل الصور إلى لوحات فنية باستخدام الذكاء الاصطناعي</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.neuralprisma" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-magic"></i></div>
-                    <div class="tool-name">YouCam Makeup <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق مكياج افتراضي بالذكاء الاصطناعي</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.cyberlink.youcam" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
-                    <div class="tool-name">Snapseed <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">محرر صور احترافي من جوجل مع أدوات ذكاء اصطناعي</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.niksoftware.snapseed" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-language"></i></div>
-                    <div class="tool-name">Google Translate <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مترجم فوري بالذكاء الاصطناعي لأكثر من 100 لغة</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.translate" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-music"></i></div>
-                    <div class="tool-name">Musicolet <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مشغل موسيقى ذكي مع تنظيم تلقائي للمكتبة الموسيقية</div>
-                    <a href="https://play.google.com/store/apps/details?id=in.krosbits.musicolet" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-video"></i></div>
-                    <div class="tool-name">CapCut <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">محرر فيديو احترافي مع تأثيرات ذكاء اصطناعي</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.lemon.lvoverseas" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-brain"></i></div>
-                    <div class="tool-name">Replicate AI <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق لتشغيل نماذج الذكاء الاصطناعي على الهاتف</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.replicate.app" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-search"></i></div>
-                    <div class="tool-name">Bing AI <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مساعد بحث ذكي من مايكروسوفت مع إجابات فورية</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.microsoft.bing" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-pen"></i></div>
-                    <div class="tool-name">Canva <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">أداة تصميم جرافيكي مع قوالب ذكاء اصطناعي</div>
-                    <a href="https://play.google.com/store/apps/details?id=com.canva.editor" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="section">
-            <div class="section-header">
-                <i class="fab fa-apple"></i> تطبيقات آيفون للذكاء الاصطناعي
+    <section class="categories" id="developer-tools">
+        <div class="container">
+            <h2 class="section-title" id="developerToolsTitle">أدوات المطورين والبرمجة</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <h3><i class="fas fa-code"></i> <span id="codingAssistants">مساعدي البرمجة</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/features/copilot" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>GitHub Copilot</span>
+                                    <span class="platform-badge">Extension</span>
+                                </div>
+                                <div class="tool-description" id="githubcopilotDesc">مساعد برمجة ذكي يقترح أكواداً كاملة في الوقت الفعلي، مدعوم من OpenAI</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://replit.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Replit Ghostwriter</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="replitDesc">بيئة تطوير سحابية مع مساعد برمجة مدمج، تدعم أكثر من 50 لغة برمجة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://cursor.sh" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Cursor IDE</span>
+                                    <span class="platform-badge">Desktop</span>
+                                </div>
+                                <div class="tool-description" id="cursorDesc">بيئة تطوير مخصصة للذكاء الاصطناعي مع واجهة بسيطة وقوية للمطورين</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codeium.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Codeium</span>
+                                    <span class="platform-badge">Extension</span>
+                                </div>
+                                <div class="tool-description" id="codeiumDesc">بديل مجاني لـ GitHub Copilot مع دعم واسع للغات البرمجة والمحررات</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://tabnine.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Tabnine</span>
+                                    <span class="platform-badge">Extension</span>
+                                </div>
+                                <div class="tool-description" id="tabnineDesc">مساعد برمجة يتعلم من كودك الخاص ويقدم اقتراحات ذكية ومخصصة</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3><i class="fas fa-database"></i> <span id="dataAnalytics">قواعد البيانات وتحليل</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://metabase.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Metabase AI</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="metabaseDesc">منصة مفتوحة المصدر لتحليل البيانات مع واجهة سهلة الاستخدام ودعم للذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://powerbi.microsoft.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Power BI AI</span>
+                                    <span class="platform-badge">Desktop</span>
+                                </div>
+                                <div class="tool-description" id="powerbiDesc">أداة مايكروسوفت القوية لتحليل البيانات وتصورها مع ميزات ذكاء اصطناعي مدمجة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://looker.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Looker Studio AI</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="lookerDesc">منصة جوجل لتحليل البيانات وبناء التقارير التفاعلية باستخدام الذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://thoughtspot.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>ThoughtSpot</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="thoughtspotDesc">تحليل البيانات باستخدام اللغة الطبيعية، اطرح أسئلتك واحصل على إجابات فورية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://sigma.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Sigma Computing</span>
+                                    <span class="platform-badge">Web</span>
+                                </div>
+                                <div class="tool-description" id="sigmaDesc">منصة تحليل البيانات السحابية مع واجهة جداول بيانات مألوفة ودعم للذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3><i class="fas fa-cloud"></i> <span id="cloudAIServices">خدمات السحابة والذكاء الاصطناعي</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://aws.amazon.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>AWS AI Services</span>
+                                    <span class="platform-badge">Cloud</span>
+                                </div>
+                                <div class="tool-description" id="awsDesc">مجموعة شاملة من خدمات الذكاء الاصطناعي من أمازون، تشمل الرؤية الحاسوبية والمعالجة اللغوية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://cloud.google.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Google Cloud AI</span>
+                                    <span class="platform-badge">Cloud</span>
+                                </div>
+                                <div class="tool-description" id="googlecloudDesc">خدمات الذكاء الاصطناعي من جوجل مع نماذج متطورة للرؤية واللغة والترجمة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://azure.microsoft.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Azure AI</span>
+                                    <span class="platform-badge">Cloud</span>
+                                </div>
+                                <div class="tool-description" id="azureDesc">منصة مايكروسوفت للذكاء الاصطناعي مع خدمات متكاملة للشركات والمطورين</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://ibm.com/watson" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>IBM Watson</span>
+                                    <span class="platform-badge">Cloud</span>
+                                </div>
+                                <div class="tool-description" id="ibmwatsonDesc">منصة IBM الشهيرة للذكاء الاصطناعي مع تطبيقات في الرعاية الصحية والتمويل والصناعة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://alibabacloud.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Alibaba Cloud AI</span>
+                                    <span class="platform-badge">Cloud</span>
+                                </div>
+                                <div class="tool-description" id="alibabaDesc">خدمات الذكاء الاصطناعي من علي بابا مع تركيز على السوق الآسيوي والتجارة الإلكترونية</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-assistant"></i></div>
-                    <div class="tool-name">Siri <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مساعد آبل الشخصي الذكي المدمج في أجهزة آيفون</div>
-                    <a href="https://www.apple.com/siri/" class="tool-link" target="_blank">
-                        <i class="fas fa-info-circle"></i> زيارة الموقع
-                    </a>
+        </div>
+    </section>
+
+    <section class="categories" id="windows-apps">
+        <div class="container">
+            <h2 class="section-title" id="windowsAppsTitle">برامج ويندوز</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <h3><i class="fab fa-windows"></i> <span id="desktopApps">برامج سطح المكتب</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://www.microsoft.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Microsoft Copilot Desktop</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="copilotdesktopDesc">نسخة سطح المكتب من مساعد مايكروسوفت الذكي، مدمجة مع نظام ويندوز 11</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://obsidian.md" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Obsidian with AI Plugins</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="obsidianDesc">تطبيق ملاحظات قوي مع دعم للإضافات الذكية التي تستخدم الذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://notion.so" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Notion AI</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="notionDesc">منصة تنظيم العمل مع مساعد ذكي مدمج لكتابة المحتوى وتنظيم المهام</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.adobe.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Adobe Creative Cloud AI</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="adobeDesc">أدوات إبداعية من أدوبي مع ميزات Firefly للذكاء الاصطناعي في الفوتوشوب وإليستريتور</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.canva.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Canva Desktop</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="canvadesktopDesc">نسخة سطح المكتب من كانفا مع أدوات تصميم ذكية وقوالب جاهزة</div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fab fa-openai"></i></div>
-                    <div class="tool-name">ChatGPT App <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق شات جي بي تي الرسمي لأجهزة آيفون وآيباد</div>
-                    <a href="https://apps.apple.com/app/chatgpt/id6448311069" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
-                    <div class="tool-name">FaceApp <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق تحرير الصور بالذكاء الاصطناعي لأجهزة iOS</div>
-                    <a href="https://apps.apple.com/app/faceapp-ai-face-editor/id1180884341" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-palette"></i></div>
-                    <div class="tool-name">Prisma <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق تحويل الصور إلى فن باستخدام الذكاء الاصطناعي</div>
-                    <a href="https://apps.apple.com/app/prisma-photo-editor/id1122649982" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-magic"></i></div>
-                    <div class="tool-name">YouCam Makeup <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق مكياج افتراضي بالذكاء الاصطناعي لأجهزة iOS</div>
-                    <a href="https://apps.apple.com/app/youcam-makeup/id863844475" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-language"></i></div>
-                    <div class="tool-name">DeepL Translate <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مترجم ذكي احترافي لترجمة النصوص والمستندات</div>
-                    <a href="https://apps.apple.com/app/deepl-translate/id1558385612" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-camera"></i></div>
-                    <div class="tool-name">Halide <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">كاميرا احترافية مع أوضاع ذكاء اصطناعي متقدمة</div>
-                    <a href="https://apps.apple.com/app/halide-mark-ii/id885697368" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-music"></i></div>
-                    <div class="tool-name">AIVA <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مولد موسيقى بالذكاء الاصطناعي للهواتف المحمولة</div>
-                    <a href="https://apps.apple.com/app/aiva-ai-music/id1500714467" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fab fa-microsoft"></i></div>
-                    <div class="tool-name">Microsoft Copilot <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">مساعد ذكي من مايكروسوفت لأجهزة آيفون</div>
-                    <a href="https://apps.apple.com/app/microsoft-copilot/id6472538444" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-brain"></i></div>
-                    <div class="tool-name">Replicate AI <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">تطبيق تشغيل نماذج الذكاء الاصطناعي على آيفون</div>
-                    <a href="https://apps.apple.com/app/replicate-ai/id6446047912" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-search"></i></div>
-                    <div class="tool-name">Perplexity AI <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">محرك بحث ذكي مع إجابات فورية لأجهزة iOS</div>
-                    <a href="https://apps.apple.com/app/perplexity-ask-anything/id1668000334" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
-                </div>
-                <div class="tool-card">
-                    <div class="tool-icon"><i class="fas fa-pen"></i></div>
-                    <div class="tool-name">Canva <span class="tool-badge">مجاني</span></div>
-                    <div class="tool-description">أداة تصميم احترافية مع ميزات الذكاء الاصطناعي</div>
-                    <a href="https://apps.apple.com/app/canva-design-photo-video/id897446215" class="tool-link" target="_blank">
-                        <i class="fas fa-mobile-alt"></i> تحميل التطبيق
-                    </a>
+                <div class="category-card">
+                    <h3><i class="fas fa-file-alt"></i> <span id="productivityApps">إنتاجية ومكتبية</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://www.microsoft.com/office" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Microsoft 365 AI</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="microsoft365Desc">حزمة مايكروسوفت أوفيس مع ميزات ذكاء اصطناعي في وورد، إكسل، وبوربوينت</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.libreoffice.org" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>LibreOffice AI</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="libreofficeDesc">حزمة مكتبية مجانية مفتوحة المصدر مع إضافات للذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.wps.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>WPS Office AI</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="wpsDesc">بديل خفيف لأوفيس مع ميزات ذكاء اصطناعي لتحسين الإنتاجية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.dropbox.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Dropbox AI</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="dropboxDesc">خدمة التخزين السحابي مع ميزات ذكاء اصطناعي لتنظيم الملفات والبحث الذكي</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.onedrive.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>OneDrive AI</span>
+                                    <span class="platform-badge">Windows</span>
+                                </div>
+                                <div class="tool-description" id="onedriveDesc">تخزين سحابي من مايكروسوفت مع تكامل كامل مع Copilot ووظائف الذكاء الاصطناعي</div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+
+    <section class="categories" id="mobile-apps">
+        <div class="container">
+            <h2 class="section-title" id="mobileAppsTitle">تطبيقات الموبايل</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <h3><i class="fab fa-android"></i> <span id="androidApps">تطبيقات أندرويد</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://play.google.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Google Assistant</span>
+                                    <span class="platform-badge">Android</span>
+                                </div>
+                                <div class="tool-description" id="googleassistantDesc">مساعد صوتي ذكي مدمج في أجهزة أندرويد مع ميزات متقدمة للتحكم في الجهاز</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://play.google.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Microsoft Copilot</span>
+                                    <span class="platform-badge">Android</span>
+                                </div>
+                                <div class="tool-description" id="copilotandroidDesc">تطبيق مايكروسوفت الرسمي للذكاء الاصطناعي مع تكامل كامل مع خدمات مايكروسوفت</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://play.google.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>ChatGPT Mobile</span>
+                                    <span class="platform-badge">Android</span>
+                                </div>
+                                <div class="tool-description" id="chatgptandroidDesc">تطبيق OpenAI الرسمي مع دعم للصوت والصور والدردشة الصوتية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://play.google.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Notion AI</span>
+                                    <span class="platform-badge">Android</span>
+                                </div>
+                                <div class="tool-description" id="notionandroidDesc">تطبيق إدارة المشاريع والملاحظات مع مساعد ذكي مدمج</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://play.google.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Grammarly Keyboard</span>
+                                    <span class="platform-badge">Android</span>
+                                </div>
+                                <div class="tool-description" id="grammarlykeyboardDesc">لوحة مفاتيح ذكية تصحح الأخطاء اللغوية في الوقت الحقيقي على جميع التطبيقات</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3><i class="fab fa-apple"></i> <span id="iosApps">تطبيقات آيفون</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Apple Siri</span>
+                                    <span class="platform-badge">iOS</span>
+                                </div>
+                                <div class="tool-description" id="siriDesc">مساعد صوتي مدمج في أجهزة آيفون مع تكامل عميق مع نظام iOS</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Microsoft Copilot</span>
+                                    <span class="platform-badge">iOS</span>
+                                </div>
+                                <div class="tool-description" id="copilotiosDesc">تطبيق مايكروسوفت للذكاء الاصطناعي مع واجهة محسّنة لأجهزة آيفون</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>ChatGPT iOS</span>
+                                    <span class="platform-badge">iOS</span>
+                                </div>
+                                <div class="tool-description" id="chatgptiosDesc">تطبيق OpenAI الرسمي مع دعم كامل لميزات iOS الحديثة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Notion AI</span>
+                                    <span class="platform-badge">iOS</span>
+                                </div>
+                                <div class="tool-description" id="notioniosDesc">تطبيق إدارة المهام والملاحظات مع ميزات ذكاء اصطناعي متطورة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Otter.ai</span>
+                                    <span class="platform-badge">iOS</span>
+                                </div>
+                                <div class="tool-description" id="otteriosDesc">تطبيق لتحويل الكلام إلى نص بدقة عالية، مثالي للاجتماعات والمحاضرات</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3><i class="fas fa-mobile-alt"></i> <span id="crossPlatformApps">تطبيقات مشتركة</span></h3>
+                    <ul>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Google Translate AI</span>
+                                    <span class="platform-badge">iOS/Android</span>
+                                </div>
+                                <div class="tool-description" id="googletranslateDesc">أداة ترجمة متقدمة مع دعم للصور والصوت والمحادثات الحية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>DeepL Mobile</span>
+                                    <span class="platform-badge">iOS/Android</span>
+                                </div>
+                                <div class="tool-description" id="deeplmobileDesc">تطبيق الترجمة الأفضل في العالم مع دقة عالية في الترجمة العربية</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Canva Mobile</span>
+                                    <span class="platform-badge">iOS/Android</span>
+                                </div>
+                                <div class="tool-description" id="canvamobileDesc">تطبيق تصميم جرافيكي قوي مع قوالب ذكية وأدوات تحرير متقدمة</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>CapCut Mobile</span>
+                                    <span class="platform-badge">iOS/Android</span>
+                                </div>
+                                <div class="tool-description" id="capcutmobileDesc">محرر فيديو احترافي مع تأثيرات ذكية وقوالب جاهزة للسوشيال ميديا</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://apps.apple.com" target="_blank" class="tool-link">
+                                <div class="tool-title">
+                                    <span>Adobe Scan</span>
+                                    <span class="platform-badge">iOS/Android</span>
+                                </div>
+                                <div class="tool-description" id="adobescanDesc">مسح المستندات وتحويلها إلى PDF مع تعرف ذكي على النصوص والجداول</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p><i class="fas fa-heart"></i> صنع بكل حب لمجتمع الذكاء الاصطناعي العربي <i class="fas fa-heart"></i></p>
-        <p>&copy; 2024 دليل أدوات الذكاء الاصطناعي المجانية. جميع الحقوق محفوظة.</p>
+        <div class="container">
+            <p id="footerText">&copy; 2024 AI Tools Hub - أكثر من 200 أداة ذكاء اصطناعي مجانية من جميع أنحاء العالم</p>
+        </div>
     </footer>
+
+    <div class="floating-settings" id="settingsBtn">
+        <i class="fas fa-cog"></i>
+    </div>
+
+    <div class="settings-modal" id="settingsModal">
+        <h3 class="settings-title" id="settingsTitle">الإعدادات</h3>
+        <div class="theme-toggle">
+            <span id="themeLabel">الوضع الليلي</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="themeToggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="language-toggle">
+            <span id="languageLabel">اللغة</span>
+            <div class="language-options">
+                <button class="language-btn active" data-lang="ar">العربية</button>
+                <button class="language-btn" data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Translation data
+        const translations = {
+            en: {
+                // Header
+                siteTitle: "AI Tools Hub",
+                aiWebsites: "AI Websites",
+                creativeTools: "Creative Tools",
+                developerTools: "Developer Tools",
+                windowsApps: "Windows Apps",
+                mobileApps: "Mobile Apps",
+                
+                // Hero
+                heroTitle: "200+ Free AI Tools",
+                heroSubtitle: "Discover the largest collection of free AI tools from around the world, completely free and available to everyone",
+                statTools: "Tools",
+                statCountries: "Countries",
+                statFree: "Free",
+                
+                // Section Titles
+                aiWebsitesTitle: "Global AI Websites",
+                creativeToolsTitle: "Creative & Design Tools",
+                developerToolsTitle: "Developer & Programming Tools",
+                windowsAppsTitle: "Windows Applications",
+                mobileAppsTitle: "Mobile Applications",
+                
+                // Category Headers
+                majorCompanies: "Major Companies",
+                specializedTools: "Specialized Tools",
+                writingTranslation: "Writing & Translation",
+                imageGeneration: "Image Generation",
+                videoGeneration: "Video Generation",
+                musicAudio: "Music & Audio",
+                codingAssistants: "Coding Assistants",
+                dataAnalytics: "Data Analytics",
+                cloudAIServices: "Cloud AI Services",
+                desktopApps: "Desktop Applications",
+                productivityApps: "Productivity Apps",
+                androidApps: "Android Apps",
+                iosApps: "iOS Apps",
+                crossPlatformApps: "Cross-Platform Apps",
+                
+                // Settings
+                settingsTitle: "Settings",
+                themeLabel: "Dark Mode",
+                languageLabel: "Language",
+                footerText: "&copy; 2024 AI Tools Hub - 200+ free AI tools from around the world",
+                
+                // Tool Descriptions
+                chatgptDesc: "The world's most powerful language model, answers questions, writes texts, and solves programming problems",
+                geminiDesc: "Google's smart assistant integrated with Google services, supports images and documents",
+                copilotDesc: "Smart assistant integrated with Windows and Microsoft apps, completely free",
+                claudeDesc: "Advanced language model focused on safety and reliability, supports large files",
+                perplexityDesc: "Smart search engine combining AI with real search results and reliable sources",
+                midjourneyDesc: "Best AI art generation tool, works through Discord platform",
+                stablediffusionDesc: "Open-source image generation model from text, available free via web",
+                runwaymlDesc: "Advanced platform for creating and editing videos using AI",
+                elevenlabsDesc: "Best text-to-speech tool with natural voices, supports multiple languages including Arabic",
+                synthesiaDesc: "Create professional videos using smart avatars without needing a camera",
+                deeplDesc: "World's best translation tool, supports Arabic, English, and multiple languages with high accuracy",
+                grammarlyDesc: "Advanced grammar checker that helps improve English writing",
+                hemingwayDesc: "Editor that helps make texts clearer and simpler, perfect for professional writing",
+                copyaiDesc: "Tool for creating marketing content, ads, and creative texts automatically",
+                rytrDesc: "Free platform for content creation in multiple languages, supports over 40 different models",
+                leonardoDesc: "Advanced platform for generating artistic images using custom models, offers 150 free images daily",
+                dreamstudioDesc: "Official interface for Stable Diffusion, offers 25 free images upon registration",
+                artbreederDesc: "Tool for mixing and editing images using AI, perfect for digital artists",
+                nightcafeDesc: "Platform for generating artistic images in different styles, offers daily free credits",
+                craiyonDesc: "Completely free tool for generating images from text, formerly known as DALL-E Mini",
+                pikaDesc: "Free tool for creating short videos from text or images, works through Discord",
+                kaiberDesc: "Platform for creating musical and artistic videos using AI",
+                heygenDesc: "Create professional videos using smart avatars speaking in over 40 languages",
+                pictoryDesc: "Automatically convert texts and articles into videos, perfect for educational content",
+                invideoDesc: "Comprehensive platform for creating and editing videos using ready-made templates and AI",
+                soundrawDesc: "Create original background music using AI, royalty-free",
+                boomyDesc: "Create complete songs in seconds, with ability to publish on global music platforms",
+                mubertDesc: "Endless AI-generated background music, perfect for live streaming",
+                descriptDesc: "Advanced video and audio editor that allows editing audio as text, with Overdub voice features",
+                podcastleDesc: "Integrated platform for creating podcasts using AI, with advanced audio editing",
+                githubcopilotDesc: "Smart programming assistant that suggests complete code in real-time, powered by OpenAI",
+                replitDesc: "Cloud development environment with built-in programming assistant, supports over 50 programming languages",
+                cursorDesc: "AI-focused development environment with simple and powerful interface for developers",
+                codeiumDesc: "Free alternative to GitHub Copilot with wide support for programming languages and editors",
+                tabnineDesc: "Programming assistant that learns from your own code and provides smart, customized suggestions",
+                metabaseDesc: "Open-source data analytics platform with easy-to-use interface and AI support",
+                powerbiDesc: "Microsoft's powerful data analytics and visualization tool with built-in AI features",
+                lookerDesc: "Google's data analytics platform for building interactive reports using AI",
+                thoughtspotDesc: "Data analytics using natural language, ask questions and get instant answers",
+                sigmaDesc: "Cloud data analytics platform with familiar spreadsheet interface and AI support",
+                awsDesc: "Comprehensive AI services from Amazon, including computer vision and natural language processing",
+                googlecloudDesc: "Google's AI services with advanced models for vision, language, and translation",
+                azureDesc: "Microsoft's AI platform with integrated services for businesses and developers",
+                ibmwatsonDesc: "IBM's famous AI platform with applications in healthcare, finance, and industry",
+                alibabaDesc: "Alibaba's AI services with focus on Asian market and e-commerce",
+                copilotdesktopDesc: "Desktop version of Microsoft's smart assistant, integrated with Windows 11",
+                obsidianDesc: "Powerful note-taking app with smart plugins using AI",
+                notionDesc: "Work organization platform with built-in AI assistant for content writing and task management",
+                adobeDesc: "Creative tools from Adobe with Firefly AI features in Photoshop and Illustrator",
+                canvadesktopDesc: "Desktop version of Canva with smart design tools and ready-made templates",
+                microsoft365Desc: "Microsoft Office suite with AI features in Word, Excel, and PowerPoint",
+                libreofficeDesc: "Free open-source office suite with AI plugins",
+                wpsDesc: "Lightweight Office alternative with AI productivity features",
+                dropboxDesc: "Cloud storage service with AI features for file organization and smart search",
+                onedriveDesc: "Microsoft's cloud storage with full Copilot integration and AI capabilities",
+                googleassistantDesc: "Smart voice assistant built into Android devices with advanced device control features",
+                copilotandroidDesc: "Official Microsoft AI app with full integration with Microsoft services",
+                chatgptandroidDesc: "Official OpenAI app with support for voice, images, and voice chat",
+                notionandroidDesc: "Project management and note-taking app with built-in smart assistant",
+                grammarlykeyboardDesc: "Smart keyboard that corrects language errors in real-time across all apps",
+                siriDesc: "Built-in voice assistant in iPhones with deep iOS integration",
+                copilotiosDesc: "Microsoft's AI app with optimized interface for iPhones",
+                chatgptiosDesc: "Official OpenAI app with full support for modern iOS features",
+                notioniosDesc: "Task and note management app with advanced AI features",
+                otteriosDesc: "High-accuracy speech-to-text app, perfect for meetings and lectures",
+                googletranslateDesc: "Advanced translation tool with support for images, voice, and live conversations",
+                deeplmobileDesc: "World's best translation app with high accuracy for Arabic translation",
+                canvamobileDesc: "Powerful graphic design app with smart templates and advanced editing tools",
+                capcutmobileDesc: "Professional video editor with smart effects and ready-made templates for social media",
+                adobescanDesc: "Document scanning and PDF conversion with smart text and table recognition"
+            },
+            ar: {
+                // Header
+                siteTitle: "AI Tools Hub",
+                aiWebsites: "مواقع الذكاء الاصطناعي",
+                creativeTools: "أدوات إبداعية",
+                developerTools: "أدوات المطورين",
+                windowsApps: "برامج ويندوز",
+                mobileApps: "تطبيقات الموبايل",
+                
+                // Hero
+                heroTitle: "أكثر من 200 أداة ذكاء اصطناعي مجانية",
+                heroSubtitle: "اكتشف أضخم تجميعة لأفضل أدوات الذكاء الاصطناعي من جميع أنحاء العالم، مجانية بالكامل ومتاحة للجميع",
+                statTools: "أدوات",
+                statCountries: "دولة",
+                statFree: "مجاني",
+                
+                // Section Titles
+                aiWebsitesTitle: "مواقع الذكاء الاصطناعي العالمية",
+                creativeToolsTitle: "أدوات إبداعية وتصميم",
+                developerToolsTitle: "أدوات المطورين والبرمجة",
+                windowsAppsTitle: "برامج ويندوز",
+                mobileAppsTitle: "تطبيقات الموبايل",
+                
+                // Category Headers
+                majorCompanies: "شركات كبرى",
+                specializedTools: "أدوات متخصصة",
+                writingTranslation: "كتابة وترجمة",
+                imageGeneration: "توليد الصور",
+                videoGeneration: "توليد الفيديو",
+                musicAudio: "الموسيقى والصوت",
+                codingAssistants: "مساعدي البرمجة",
+                dataAnalytics: "قواعد البيانات وتحليل",
+                cloudAIServices: "خدمات السحابة والذكاء الاصطناعي",
+                desktopApps: "برامج سطح المكتب",
+                productivityApps: "إنتاجية ومكتبية",
+                androidApps: "تطبيقات أندرويد",
+                iosApps: "تطبيقات آيفون",
+                crossPlatformApps: "تطبيقات مشتركة",
+                
+                // Settings
+                settingsTitle: "الإعدادات",
+                themeLabel: "الوضع الليلي",
+                languageLabel: "اللغة",
+                footerText: "&copy; 2024 AI Tools Hub - أكثر من 200 أداة ذكاء اصطناعي مجانية من جميع أنحاء العالم",
+                
+                // Tool Descriptions (already in Arabic in HTML)
+                chatgptDesc: "أقوى نموذج لغوي في العالم، يجيب على الأسئلة، يكتب النصوص، ويحل المشكلات البرمجية",
+                geminiDesc: "مساعد ذكي من جوجل يدمج مع خدمات جوجل الأخرى، يدعم الصور والمستندات",
+                copilotDesc: "مساعد ذكي متكامل مع نظام ويندوز وتطبيقات مايكروسوفت، مجاني بالكامل",
+                claudeDesc: "نموذج لغوي متقدم يركز على السلامة والموثوقية، يدعم ملفات كبيرة",
+                perplexityDesc: "محرك بحث ذكي يجمع بين الذكاء الاصطناعي ونتائج البحث الحقيقية مع مصادر موثوقة",
+                midjourneyDesc: "أفضل أداة لتوليد الصور الفنية باستخدام الذكاء الاصطناعي، تعمل عبر منصة Discord",
+                stablediffusionDesc: "نموذج مفتوح المصدر لتوليد الصور من النصوص، متاح مجاناً عبر الويب",
+                runwaymlDesc: "منصة متقدمة لإنشاء وتحرير الفيديو باستخدام الذكاء الاصطناعي",
+                elevenlabsDesc: "أفضل أداة لتحويل النص إلى كلام طبيعي، تدعم لغات متعددة بما فيها العربية",
+                synthesiaDesc: "إنشاء مقاطع فيديو احترافية باستخدام أفاتار ذكية بدون الحاجة للكاميرا",
+                deeplDesc: "أفضل أداة ترجمة في العالم، تدعم العربية والإنجليزية ولغات متعددة بدقة عالية",
+                grammarlyDesc: "أداة تدقيق لغوي متقدمة تساعد على تحسين الكتابة باللغة الإنجليزية",
+                hemingwayDesc: "محرر يساعد على جعل النصوص أكثر وضوحاً وبساطة، مثالي للكتابة الاحترافية",
+                copyaiDesc: "أداة لإنشاء المحتوى التسويقي، الإعلانات، والنصوص الإبداعية تلقائياً",
+                rytrDesc: "منصة مجانية لإنشاء المحتوى بلغات متعددة، تدعم أكثر من 40 نموذجاً مختلفاً",
+                leonardoDesc: "منصة متقدمة لتوليد الصور الفنية باستخدام نماذج مخصصة، تقدم 150 صورة يومياً مجاناً",
+                dreamstudioDesc: "واجهة رسمية لـ Stable Diffusion، تقدم 25 صورة مجانية عند التسجيل",
+                artbreederDesc: "أداة لخلط وتعديل الصور باستخدام الذكاء الاصطناعي، مثالية للفنانين الرقميين",
+                nightcafeDesc: "منصة لتوليد الصور الفنية بأساليب مختلفة، تقدم رصيداً يومياً مجانياً",
+                craiyonDesc: "أداة مجانية بالكامل لتوليد الصور من النصوص، سابقاً تعرف باسم DALL-E Mini",
+                pikaDesc: "أداة مجانية لإنشاء مقاطع فيديو قصيرة من النصوص أو الصور، تعمل عبر Discord",
+                kaiberDesc: "منصة لإنشاء الفيديوهات الموسيقية والفنية باستخدام الذكاء الاصطناعي",
+                heygenDesc: "إنشاء مقاطع فيديو احترافية باستخدام أفاتار ذكية تتحدث بأكثر من 40 لغة",
+                pictoryDesc: "تحويل النصوص والمقالات إلى مقاطع فيديو تلقائياً، مثالي للمحتوى التعليمي",
+                invideoDesc: "منصة شاملة لإنشاء وتحرير الفيديو باستخدام القوالب الجاهزة والذكاء الاصطناعي",
+                soundrawDesc: "إنشاء موسيقى خلفية أصلية باستخدام الذكاء الاصطناعي، خالية من حقوق الملكية",
+                boomyDesc: "إنشاء أغاني كاملة في ثوانٍ، مع إمكانية نشرها على منصات الموسيقى العالمية",
+                mubertDesc: "موسيقى خلفية لا نهائية تم إنشاؤها بواسطة الذكاء الاصطناعي، مثالية للبث المباشر",
+                descriptDesc: "محرر فيديو وصوت متقدم يسمح بتحرير الصوت كنص، مع ميزات Overdub الصوتية",
+                podcastleDesc: "منصة متكاملة لإنشاء البودكاست باستخدام الذكاء الاصطناعي، مع تحرير صوتي متقدم",
+                githubcopilotDesc: "مساعد برمجة ذكي يقترح أكواداً كاملة في الوقت الفعلي، مدعوم من OpenAI",
+                replitDesc: "بيئة تطوير سحابية مع مساعد برمجة مدمج، تدعم أكثر من 50 لغة برمجة",
+                cursorDesc: "بيئة تطوير مخصصة للذكاء الاصطناعي مع واجهة بسيطة وقوية للمطورين",
+                codeiumDesc: "بديل مجاني لـ GitHub Copilot مع دعم واسع للغات البرمجة والمحررات",
+                tabnineDesc: "مساعد برمجة يتعلم من كودك الخاص ويقدم اقتراحات ذكية ومخصصة",
+                metabaseDesc: "منصة مفتوحة المصدر لتحليل البيانات مع واجهة سهلة الاستخدام ودعم للذكاء الاصطناعي",
+                powerbiDesc: "أداة مايكروسوفت القوية لتحليل البيانات وتصورها مع ميزات ذكاء اصطناعي مدمجة",
+                lookerDesc: "منصة جوجل لتحليل البيانات وبناء التقارير التفاعلية باستخدام الذكاء الاصطناعي",
+                thoughtspotDesc: "تحليل البيانات باستخدام اللغة الطبيعية، اطرح أسئلتك واحصل على إجابات فورية",
+                sigmaDesc: "منصة تحليل البيانات السحابية مع واجهة جداول بيانات مألوفة ودعم للذكاء الاصطناعي",
+                awsDesc: "مجموعة شاملة من خدمات الذكاء الاصطناعي من أمازون، تشمل الرؤية الحاسوبية والمعالجة اللغوية",
+                googlecloudDesc: "خدمات الذكاء الاصطناعي من جوجل مع نماذج متطورة للرؤية واللغة والترجمة",
+                azureDesc: "منصة مايكروسوفت للذكاء الاصطناعي مع خدمات متكاملة للشركات والمطورين",
+                ibmwatsonDesc: "منصة IBM الشهيرة للذكاء الاصطناعي مع تطبيقات في الرعاية الصحية والتمويل والصناعة",
+                alibabaDesc: "خدمات الذكاء الاصطناعي من علي بابا مع تركيز على السوق الآسيوي والتجارة الإلكترونية",
+                copilotdesktopDesc: "نسخة سطح المكتب من مساعد مايكروسوفت الذكي، مدمجة مع نظام ويندوز 11",
+                obsidianDesc: "تطبيق ملاحظات قوي مع دعم للإضافات الذكية التي تستخدم الذكاء الاصطناعي",
+                notionDesc: "منصة تنظيم العمل مع مساعد ذكي مدمج لكتابة المحتوى وتنظيم المهام",
+                adobeDesc: "أدوات إبداعية من أدوبي مع ميزات Firefly للذكاء الاصطناعي في الفوتوشوب وإليستريتور",
+                canvadesktopDesc: "نسخة سطح المكتب من كانفا مع أدوات تصميم ذكية وقوالب جاهزة",
+                microsoft365Desc: "حزمة مايكروسوفت أوفيس مع ميزات ذكاء اصطناعي في وورد، إكسل، وبوربوينت",
+                libreofficeDesc: "حزمة مكتبية مجانية مفتوحة المصدر مع إضافات للذكاء الاصطناعي",
+                wpsDesc: "بديل خفيف لأوفيس مع ميزات ذكاء اصطناعي لتحسين الإنتاجية",
+                dropboxDesc: "خدمة التخزين السحابي مع ميزات ذكاء اصطناعي لتنظيم الملفات والبحث الذكي",
+                onedriveDesc: "تخزين سحابي من مايكروسوفت مع تكامل كامل مع Copilot ووظائف الذكاء الاصطناعي",
+                googleassistantDesc: "مساعد صوتي ذكي مدمج في أجهزة أندرويد مع ميزات متقدمة للتحكم في الجهاز",
+                copilotandroidDesc: "تطبيق مايكروسوفت الرسمي للذكاء الاصطناعي مع تكامل كامل مع خدمات مايكروسوفت",
+                chatgptandroidDesc: "تطبيق OpenAI الرسمي مع دعم للصوت والصور والدردشة الصوتية",
+                notionandroidDesc: "تطبيق إدارة المشاريع والملاحظات مع مساعد ذكي مدمج",
+                grammarlykeyboardDesc: "لوحة مفاتيح ذكية تصحح الأخطاء اللغوية في الوقت الحقيقي على جميع التطبيقات",
+                siriDesc: "مساعد صوتي مدمج في أجهزة آيفون مع تكامل عميق مع نظام iOS",
+                copilotiosDesc: "تطبيق مايكروسوفت للذكاء الاصطناعي مع واجهة محسّنة لأجهزة آيفون",
+                chatgptiosDesc: "تطبيق OpenAI الرسمي مع دعم كامل لميزات iOS الحديثة",
+                notioniosDesc: "تطبيق إدارة المهام والملاحظات مع ميزات ذكاء اصطناعي متطورة",
+                otteriosDesc: "تطبيق لتحويل الكلام إلى نص بدقة عالية، مثالي للاجتماعات والمحاضرات",
+                googletranslateDesc: "أداة ترجمة متقدمة مع دعم للصور والصوت والمحادثات الحية",
+                deeplmobileDesc: "تطبيق الترجمة الأفضل في العالم مع دقة عالية في الترجمة العربية",
+                canvamobileDesc: "تطبيق تصميم جرافيكي قوي مع قوالب ذكية وأدوات تحرير متقدمة",
+                capcutmobileDesc: "محرر فيديو احترافي مع تأثيرات ذكية وقوالب جاهزة للسوشيال ميديا",
+                adobescanDesc: "مسح المستندات وتحويلها إلى PDF مع تعرف ذكي على النصوص والجداول"
+            }
+        };
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Settings Modal Toggle
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsModal = document.getElementById('settingsModal');
+        
+        settingsBtn.addEventListener('click', () => {
+            settingsModal.classList.toggle('active');
+        });
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!settingsBtn.contains(e.target) && !settingsModal.contains(e.target)) {
+                settingsModal.classList.remove('active');
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+            }
+        });
+
+        // Language Toggle
+        const languageBtns = document.querySelectorAll('.language-btn');
+        
+        function setLanguage(lang) {
+            // Update active button
+            languageBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+            
+            // Update all translatable elements
+            Object.keys(translations[lang]).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // Update navigation links
+            document.querySelectorAll('[data-section]').forEach(link => {
+                const section = link.getAttribute('data-section');
+                const translatedText = translations[lang][section];
+                if (translatedText) {
+                    link.textContent = translatedText;
+                }
+            });
+            
+            // Update direction for Arabic
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+        }
+
+        languageBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const selectedLang = btn.getAttribute('data-lang');
+                setLanguage(selectedLang);
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize with current language
+        setLanguage('ar');
+    </script>
 </body>
 </html>
