@@ -21,6 +21,7 @@ let hasUnsavedChanges = false; // Track unsaved changes
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    loadLanguagePreference(); // Load saved language first
     loadGithubConfig();
     initializeEventListeners();
     loadToolsData();
@@ -753,6 +754,24 @@ function searchTools() {
 }
 
 // ===== Language Toggle =====
+function loadLanguagePreference() {
+    // Load saved language preference from localStorage
+    const savedLang = localStorage.getItem('adminPreferredLanguage');
+    if (savedLang && (savedLang === 'en' || savedLang === 'ar')) {
+        currentLang = savedLang;
+        // Update the language toggle button text
+        const langText = document.getElementById('adminLangText');
+        if (langText) {
+            langText.textContent = currentLang === 'en' ? 'العربية' : 'English';
+        }
+    }
+}
+
+function saveLanguagePreference() {
+    // Save language preference to localStorage
+    localStorage.setItem('adminPreferredLanguage', currentLang);
+}
+
 function updateLanguage() {
     const html = document.documentElement;
     
@@ -934,6 +953,7 @@ function initializeEventListeners() {
     document.getElementById('adminLangToggle').addEventListener('click', () => {
         currentLang = currentLang === 'en' ? 'ar' : 'en';
         document.getElementById('adminLangText').textContent = currentLang === 'en' ? 'العربية' : 'English';
+        saveLanguagePreference(); // Save preference after changing
         updateLanguage();
     });
     
