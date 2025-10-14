@@ -945,6 +945,18 @@ ul {
     margin-bottom: 0.5rem;
 }
 
+.footer-bottom a {
+    color: var(--primary-light);
+    font-weight: 600;
+    transition: var(--transition-fast);
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
 /* ========= Scroll to Top Button ========= */
 .scroll-top {
     position: fixed;
