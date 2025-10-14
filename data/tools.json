@@ -1,15 +1,13 @@
 {
   "online": [
     {
-      "name": "DeepSeek",
+      "name": "Test 1",
       "descriptionEn": "DeepSeek is a fast and completely free Chinese artificial intelligence.",
       "descriptionAr": "ديب سيك ذكاء اصطناعي صيني سريع ومجاني بالكامل",
       "url": "https://chat.deepseek.com/",
       "category": "text",
       "pricing": "free",
-      "badge": "",
       "iconClass": "fas fa-robot",
-      "iconGradient": "linear-gradient(135deg, #4a90e2, #357abd)",
       "featuresEn": [
         "Chat"
       ],
