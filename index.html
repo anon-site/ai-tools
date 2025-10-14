@@ -6,11 +6,22 @@
     <meta name="description" content="Complete collection of AI tools for online, desktop, mobile, and browser extensions">
     <meta name="keywords" content="AI tools, artificial intelligence, chrome extensions, android apps, iOS apps">
     <title>AI Tools Hub - مركز أدوات الذكاء الاصطناعي</title>
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Async load fonts for faster initial render -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap"></noscript>
+    
+    <!-- Async load Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 </head>
 <body>
     <!-- Language Toggle & Header -->
@@ -627,20 +638,6 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter-section">
-        <div class="container">
-            <div class="newsletter-content">
-                <h2 data-en="Stay Updated with Latest AI Tools" data-ar="ابقَ على اطلاع بأحدث أدوات الذكاء الاصطناعي">Stay Updated with Latest AI Tools</h2>
-                <p data-en="Get weekly updates about new AI tools and technologies" data-ar="احصل على تحديثات أسبوعية حول أدوات وتقنيات الذكاء الاصطناعي الجديدة">Get weekly updates about new AI tools and technologies</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email" data-placeholder-en="Enter your email" data-placeholder-ar="أدخل بريدك الإلكتروني" required>
-                    <button type="submit" data-en="Subscribe" data-ar="اشترك">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -701,6 +698,7 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <!-- Defer JavaScript for faster page load -->
+    <script src="script.js" defer></script>
 </body>
 </html>

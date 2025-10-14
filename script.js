@@ -194,71 +194,39 @@ function animateValue(element, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
-// Newsletter Form
-function initNewsletter() {
-    const form = document.querySelector('.newsletter-form');
-    
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = form.querySelector('input[type="email"]').value;
-        
-        if (email) {
-            // Show success message
-            alert(currentLang === 'en' 
-                ? 'Thank you for subscribing! You will receive updates soon.'
-                : 'شكراً للاشتراك! ستتلقى التحديثات قريباً.');
-            form.reset();
-        }
-    });
-}
-
-// Add hover effect to tool cards
+// Add hover effect to tool cards - Optimized with CSS
 function initCardEffects() {
-    const cards = document.querySelectorAll('.tool-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-8px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0) scale(1)';
-        });
-    });
+    // Hover effects are now handled purely by CSS for better performance
+    // This function is kept for potential future enhancements
 }
 
-// Loading Animation
+// Loading Animation - Removed to improve initial page load speed
 function showLoadingAnimation() {
-    const toolsGrids = document.querySelectorAll('.tools-grid');
-    
-    toolsGrids.forEach(grid => {
-        grid.classList.add('loading');
-    });
-    
-    setTimeout(() => {
-        toolsGrids.forEach(grid => {
-            grid.classList.remove('loading');
-        });
-    }, 500);
+    // Loading animation removed for faster perceived performance
+    // Cards now appear immediately with smooth fade-in
 }
 
-// Intersection Observer for Fade-in Animation
+// Intersection Observer for Fade-in Animation - Optimized
 function initFadeInAnimation() {
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                // Add staggered animation only for visible elements
+                setTimeout(() => {
+                    entry.target.classList.add('fade-in-visible');
+                }, index * 30); // Reduced delay from 100ms to 30ms
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { 
+        threshold: 0.05,  // Reduced threshold for earlier triggering
+        rootMargin: '50px' // Start animation before element is fully visible
+    });
     
-    // Add initial styles and observe elements
+    // Add initial class and observe elements
     const elements = document.querySelectorAll('.tool-card, .stat-card');
-    elements.forEach((element, index) => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = `all 0.6s ease ${index * 0.1}s`;
+    elements.forEach((element) => {
+        element.classList.add('fade-in-hidden');
         observer.observe(element);
     });
 }
@@ -338,28 +306,48 @@ function initToolRating() {
     // Can be extended to allow users to rate tools
 }
 
-// Initialize all features when DOM is ready
+// Initialize all features when DOM is ready - Optimized
 document.addEventListener('DOMContentLoaded', () => {
+    // Critical initializations first
     loadLanguagePreference();
     initLanguageToggle();
     initSearch();
     initCategoryFilter();
-    initScrollToTop();
-    initSmoothScroll();
-    initMobileMenu();
-    animateStats();
-    initNewsletter();
-    initCardEffects();
-    initFadeInAnimation();
-    trackExternalLinks();
-    initDarkMode();
-    initKeyboardNavigation();
     
     // Save language preference when changed
     document.getElementById('langToggle').addEventListener('click', saveLanguagePreference);
     
-    // Show initial loading animation
-    showLoadingAnimation();
+    // Defer non-critical initializations using requestIdleCallback or setTimeout
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            initScrollToTop();
+            initSmoothScroll();
+            initMobileMenu();
+            animateStats();
+            initCardEffects();
+            trackExternalLinks();
+            initDarkMode();
+            initKeyboardNavigation();
+        });
+        
+        // Fade-in animation with slight delay to ensure smooth rendering
+        requestIdleCallback(() => {
+            initFadeInAnimation();
+        });
+    } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(() => {
+            initScrollToTop();
+            initSmoothScroll();
+            initMobileMenu();
+            animateStats();
+            initCardEffects();
+            trackExternalLinks();
+            initDarkMode();
+            initKeyboardNavigation();
+            initFadeInAnimation();
+        }, 100);
+    }
 });
 
 // Handle window resize
