@@ -30,6 +30,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== GitHub Configuration =====
 function loadGithubConfig() {
+    // Check for unsaved local data first
+    const localData = localStorage.getItem('unsavedToolsData');
+    if (localData) {
+        try {
+            const parsed = JSON.parse(localData);
+            const message = currentLang === 'en' ? 
+                'Found unsaved local changes from a previous session.\n\nDo you want to restore them?' :
+                'تم العثور على تغييرات محلية غير محفوظة من جلسة سابقة.\n\nهل تريد استعادتها؟';
+            
+            if (confirm(message)) {
+                toolsData = parsed;
+                hasUnsavedChanges = true;
+                updateUnsavedIndicator();
+                updateStats();
+                renderToolsTable();
+                showToast(currentLang === 'en' ? 
+                    'Previous changes restored. Don\'t forget to sync!' : 
+                    'تم استعادة التغييرات السابقة. لا تنسَ المزامنة!', 'info');
+            }
+            // Clear the backup after restoring or declining
+            localStorage.removeItem('unsavedToolsData');
+        } catch (error) {
+            console.error('Failed to restore local data:', error);
+            localStorage.removeItem('unsavedToolsData');
+        }
+    }
+    
     // Try to load from localStorage if user chose "Remember Me"
     const savedConfig = localStorage.getItem('githubConfig');
     const rememberMe = localStorage.getItem('rememberMe') === 'true';
@@ -90,6 +117,7 @@ function updateGithubStatus(connected) {
     const statusContainer = statusEl.parentElement;
     const logoutBtn = document.getElementById('logoutGithub');
     const manualSyncBtn = document.getElementById('manualSyncButton');
+    const reloadBtn = document.getElementById('reloadGithubButton');
     
     if (connected) {
         statusContainer.classList.add('connected');
@@ -98,6 +126,7 @@ function updateGithubStatus(connected) {
         statusEl.setAttribute('data-ar', 'متصل');
         logoutBtn.style.display = 'flex';
         manualSyncBtn.style.display = 'flex';
+        reloadBtn.style.display = 'flex';
     } else {
         statusContainer.classList.remove('connected');
         statusEl.textContent = 'Not Connected';
@@ -105,6 +134,7 @@ function updateGithubStatus(connected) {
         statusEl.setAttribute('data-ar', 'غير متصل');
         logoutBtn.style.display = 'none';
         manualSyncBtn.style.display = 'none';
+        reloadBtn.style.display = 'none';
     }
 }
 
@@ -300,19 +330,47 @@ async function updateFileOnGithub(path, content, sha, message) {
 }
 
 // ===== Data Management =====
-async function loadToolsData() {
-    showLoading('Loading tools from GitHub...');
+async function loadToolsData(forceLoad = false) {
+    showLoading(currentLang === 'en' ? 'Loading tools from GitHub...' : 'جارٍ تحميل الأدوات من GitHub...');
     
     try {
         if (githubConfig.owner && githubConfig.repo && githubConfig.token) {
             const result = await getFileFromGithub('data/tools.json');
-            toolsData = result.content;
-            hasUnsavedChanges = false; // Reset after loading from GitHub
+            
+            // Check if we have unsaved local changes
+            if (hasUnsavedChanges && !forceLoad) {
+                hideLoading();
+                
+                const message = currentLang === 'en' ? 
+                    'You have unsaved changes locally. What would you like to do?\n\n' +
+                    '• Click OK to KEEP your local changes (you can sync them later)\n' +
+                    '• Click Cancel to DISCARD local changes and load from GitHub' :
+                    'لديك تغييرات محلية غير محفوظة. ماذا تريد أن تفعل؟\n\n' +
+                    '• اضغط موافق للاحتفاظ بتغييراتك المحلية (يمكنك مزامنتها لاحقًا)\n' +
+                    '• اضغط إلغاء للتخلي عن التغييرات المحلية وتحميل من GitHub';
+                
+                if (confirm(message)) {
+                    // Keep local changes
+                    showToast(currentLang === 'en' ? 
+                        'Local changes preserved. Click "Sync Now" to upload them to GitHub.' : 
+                        'تم الاحتفاظ بالتغييرات المحلية. اضغط "مزامنة الآن" لرفعها إلى GitHub.', 'info');
+                    return;
+                } else {
+                    // Load from GitHub, discard local
+                    toolsData = result.content;
+                    hasUnsavedChanges = false;
+                }
+            } else {
+                // No unsaved changes, safe to load
+                toolsData = result.content;
+                hasUnsavedChanges = false;
+            }
+            
             updateUnsavedIndicator();
             updateStats();
             renderToolsTable();
             hideLoading();
-            showToast('Tools loaded successfully', 'success');
+            showToast(currentLang === 'en' ? 'Tools loaded successfully from GitHub!' : 'تم تحميل الأدوات بنجاح من GitHub!', 'success');
         } else {
             hideLoading();
             showToast(currentLang === 'en' ? 
@@ -321,12 +379,14 @@ async function loadToolsData() {
         }
     } catch (error) {
         hideLoading();
-        showToast('Failed to load tools: ' + error.message, 'error');
+        showToast(currentLang === 'en' ? 
+            'Failed to load tools: ' + error.message : 
+            'فشل تحميل الأدوات: ' + error.message, 'error');
         console.error(error);
     }
 }
 
-async function saveToolsData(message = 'Update tools data') {
+async function saveToolsData(message = 'Update tools data', autoSync = false) {
     // Save locally only (in memory)
     hasUnsavedChanges = true;
     updateUnsavedIndicator();
@@ -336,6 +396,11 @@ async function saveToolsData(message = 'Update tools data') {
     showToast(currentLang === 'en' ? 
         'Changes saved locally. Click "Sync Now" to upload to GitHub.' : 
         'تم حفظ التغييرات محليًا. اضغط "مزامنة الآن" للرفع إلى GitHub.', 'info');
+    
+    // If autoSync is enabled, sync immediately
+    if (autoSync && githubConfig.owner && githubConfig.repo && githubConfig.token) {
+        setTimeout(() => manualSyncToGithub(), 500);
+    }
 }
 
 // Manual Sync to GitHub
@@ -357,7 +422,7 @@ async function manualSyncToGithub() {
     const syncBtn = document.getElementById('manualSyncButton');
     syncBtn.classList.add('syncing');
     
-    showLoading('Syncing to GitHub...');
+    showLoading(currentLang === 'en' ? 'Syncing to GitHub...' : 'جارٍ المزامنة مع GitHub...');
     
     try {
         // Get current file SHA
@@ -375,6 +440,9 @@ async function manualSyncToGithub() {
         hasUnsavedChanges = false;
         updateUnsavedIndicator();
         
+        // Clear local backup
+        localStorage.removeItem('unsavedToolsData');
+        
         hideLoading();
         syncBtn.classList.remove('syncing');
         
@@ -388,6 +456,45 @@ async function manualSyncToGithub() {
         showToast(currentLang === 'en' ? 
             'Failed to sync: ' + error.message : 
             'فشلت المزامنة: ' + error.message, 'error');
+        console.error(error);
+    }
+}
+
+// Reload from GitHub (force reload, discard local changes)
+async function reloadFromGithub() {
+    if (!githubConfig.owner || !githubConfig.repo || !githubConfig.token) {
+        showToast(currentLang === 'en' ? 
+            'Please connect to GitHub first.' : 
+            'يرجى الاتصال بـ GitHub أولًا.', 'error');
+        return;
+    }
+    
+    // Confirm if there are unsaved changes
+    if (hasUnsavedChanges) {
+        const message = currentLang === 'en' ? 
+            'You have unsaved changes that will be LOST.\n\nAre you sure you want to reload from GitHub?' :
+            'لديك تغييرات غير محفوظة سيتم فقدها.\n\nهل أنت متأكد من إعادة التحميل من GitHub؟';
+        
+        if (!confirm(message)) {
+            return;
+        }
+    }
+    
+    const reloadBtn = document.getElementById('reloadGithubButton');
+    reloadBtn.classList.add('loading');
+    
+    try {
+        await loadToolsData(true); // Force load from GitHub
+        reloadBtn.classList.remove('loading');
+        
+        // Clear local backup
+        localStorage.removeItem('unsavedToolsData');
+        
+    } catch (error) {
+        reloadBtn.classList.remove('loading');
+        showToast(currentLang === 'en' ? 
+            'Failed to reload: ' + error.message : 
+            'فشل إعادة التحميل: ' + error.message, 'error');
         console.error(error);
     }
 }
@@ -937,6 +1044,9 @@ function initializeEventListeners() {
     // Manual Sync Button
     document.getElementById('manualSyncButton').addEventListener('click', manualSyncToGithub);
     
+    // Reload from GitHub Button
+    document.getElementById('reloadGithubButton').addEventListener('click', reloadFromGithub);
+    
     // Import/Export
     document.getElementById('exportData').addEventListener('click', exportData);
     document.getElementById('importDataBtn').addEventListener('click', () => {
@@ -964,6 +1074,13 @@ function initializeEventListeners() {
     // Warn before leaving page with unsaved changes
     window.addEventListener('beforeunload', (e) => {
         if (hasUnsavedChanges) {
+            // Backup unsaved data to localStorage
+            try {
+                localStorage.setItem('unsavedToolsData', JSON.stringify(toolsData));
+            } catch (error) {
+                console.error('Failed to backup data:', error);
+            }
+            
             e.preventDefault();
             e.returnValue = '';
             return '';
