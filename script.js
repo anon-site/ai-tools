@@ -185,11 +185,12 @@ function animateStats() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const target = parseInt(entry.target.getAttribute('data-count'));
-                animateValue(entry.target, 0, target, 2000);
+                // Faster animation: reduced from 2000ms to 1200ms
+                animateValue(entry.target, 0, target, 1200);
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 }); // Lower threshold for earlier trigger
     
     stats.forEach(stat => observer.observe(stat));
 }
@@ -199,13 +200,20 @@ function animateValue(element, start, end, duration) {
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const value = Math.floor(progress * (end - start) + start);
+        // Easing function for smoother animation
+        const easedProgress = easeOutExpo(progress);
+        const value = Math.floor(easedProgress * (end - start) + start);
         element.textContent = value + '+';
         if (progress < 1) {
             window.requestAnimationFrame(step);
         }
     };
     window.requestAnimationFrame(step);
+}
+
+// Easing function for exponential ease-out (faster start, slower end)
+function easeOutExpo(t) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 }
 
 // Load Tools from JSON

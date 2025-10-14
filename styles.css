@@ -359,47 +359,110 @@ body[dir="rtl"] .search-box input {
 
 /* Statistics Section */
 .stats-section {
-    padding: 4rem 0;
-    background: var(--bg-darker);
+    padding: 5rem 0;
+    background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    opacity: 0.5;
 }
 
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .stat-card {
     text-align: center;
-    padding: 2rem;
-    background: var(--bg-card);
-    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
     border: 1px solid var(--border-color);
-    transition: var(--transition);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-card:hover::before {
+    left: 100%;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3), 0 0 0 1px var(--primary-color);
     border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 1) 0%, rgba(15, 23, 42, 1) 100%);
 }
 
 .stat-card i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.4));
+}
+
+.stat-card:hover i {
+    transform: scale(1.15) rotateY(360deg);
+    filter: drop-shadow(0 0 25px rgba(99, 102, 241, 0.6));
 }
 
 .stat-number {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 900;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.8rem;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-number {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
 }
 
 .stat-card p {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover p {
+    color: var(--text-primary);
 }
 
 /* Tools Section */
@@ -886,9 +949,22 @@ body[dir="rtl"] .scroll-to-top {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
+    
+    .stat-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .stat-card i {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
 
     .stat-number {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+    
+    .stat-card p {
+        font-size: 0.9rem;
     }
 
     .tools-grid {
