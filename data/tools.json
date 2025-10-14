@@ -7,9 +7,7 @@
       "url": "https://chat.deepseek.com/",
       "category": "text",
       "pricing": "free",
-      "badge": "",
       "iconClass": "fas fa-robot",
-      "iconGradient": "linear-gradient(135deg, #4a90e2, #357abd)",
       "featuresEn": [
         "Chat"
       ],
