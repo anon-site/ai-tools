@@ -77,6 +77,11 @@
                     <i class="fab fa-github"></i>
                     <span id="githubStatus" data-en="Not Connected" data-ar="غير متصل">Not Connected</span>
                 </div>
+                
+                <button class="btn-logout" id="logoutGithub" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span data-en="Disconnect GitHub" data-ar="قطع الاتصال">Disconnect GitHub</span>
+                </button>
             </div>
         </aside>
 
@@ -227,26 +232,13 @@
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label data-en="Pricing" data-ar="التسعير">Pricing *</label>
-                            <select id="pricingSelect" required>
-                                <option value="free">Free</option>
-                                <option value="freemium">Free + Paid</option>
-                                <option value="paid">Paid</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label data-en="Badge" data-ar="الشارة">Badge</label>
-                            <select id="badgeSelect">
-                                <option value="">None</option>
-                                <option value="popular">Popular</option>
-                                <option value="new">New</option>
-                                <option value="premium">Premium</option>
-                                <option value="trending">Trending</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label data-en="Pricing" data-ar="التسعير">Pricing *</label>
+                        <select id="pricingSelect" required>
+                            <option value="free">Free</option>
+                            <option value="freemium">Free + Paid</option>
+                            <option value="paid">Paid</option>
+                        </select>
                     </div>
                 </div>
 
@@ -254,18 +246,10 @@
                 <div class="form-section">
                     <h3 data-en="Visual Styling" data-ar="التصميم المرئي">Visual Styling</h3>
                     
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label data-en="Icon Class" data-ar="فئة الأيقونة">Icon Class (FontAwesome) *</label>
-                            <input type="text" id="iconClass" required placeholder="fas fa-robot">
-                            <small>Example: fas fa-robot, fas fa-code, fas fa-image</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label data-en="Icon Background" data-ar="خلفية الأيقونة">Icon Background *</label>
-                            <input type="text" id="iconGradient" required placeholder="linear-gradient(135deg, #667eea, #764ba2)">
-                            <small>CSS gradient or color</small>
-                        </div>
+                    <div class="form-group">
+                        <label data-en="Icon Class" data-ar="فئة الأيقونة">Icon Class (FontAwesome) *</label>
+                        <input type="text" id="iconClass" required placeholder="fas fa-robot">
+                        <small>Example: fas fa-robot, fas fa-code, fas fa-image</small>
                     </div>
                 </div>
 

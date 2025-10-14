@@ -163,6 +163,33 @@
     color: var(--accent-color);
 }
 
+.btn-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid #ef4444;
+    border-radius: 8px;
+    color: #ef4444;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.btn-logout:hover {
+    background: #ef4444;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-logout i {
+    font-size: 1rem;
+}
+
 /* Auto-detection styles */
 #githubToken.detecting {
     border-color: var(--primary-color);

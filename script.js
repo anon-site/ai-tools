@@ -194,6 +194,221 @@ function animateValue(element, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
+// Load Tools from JSON
+async function loadToolsFromJSON() {
+    try {
+        const response = await fetch('data/tools.json');
+        const data = await response.json();
+        
+        // Render tools for each section
+        renderOnlineTools(data.online);
+        renderDesktopTools(data.desktop);
+        renderMobileTools(data.mobile);
+        renderExtensions(data.extensions);
+        
+        // Update statistics
+        updateStats(data);
+        
+    } catch (error) {
+        console.error('Failed to load tools:', error);
+        // Keep existing hardcoded tools if JSON fails to load
+    }
+}
+
+function renderOnlineTools(tools) {
+    const grid = document.getElementById('onlineToolsGrid');
+    if (!tools || tools.length === 0) return;
+    
+    // Clear existing tools
+    grid.innerHTML = '';
+    
+    tools.forEach(tool => {
+        const card = createToolCard(tool);
+        grid.appendChild(card);
+    });
+}
+
+function renderDesktopTools(tools) {
+    const grid = document.getElementById('desktopGrid');
+    if (!tools || tools.length === 0 || !grid) return;
+    
+    grid.innerHTML = '';
+    tools.forEach(tool => {
+        const card = createToolCard(tool, 'desktop');
+        grid.appendChild(card);
+    });
+}
+
+function renderMobileTools(tools) {
+    const grid = document.getElementById('mobileGrid');
+    if (!tools || tools.length === 0 || !grid) return;
+    
+    grid.innerHTML = '';
+    tools.forEach(tool => {
+        const card = createToolCard(tool, 'mobile');
+        grid.appendChild(card);
+    });
+}
+
+function renderExtensions(tools) {
+    const grid = document.getElementById('extensionsGrid');
+    if (!tools || tools.length === 0 || !grid) return;
+    
+    grid.innerHTML = '';
+    tools.forEach(tool => {
+        const card = createToolCard(tool, 'extension');
+        grid.appendChild(card);
+    });
+}
+
+function createToolCard(tool, type = 'online') {
+    const card = document.createElement('div');
+    card.className = 'tool-card';
+    if (tool.category) {
+        card.setAttribute('data-category', tool.category);
+    }
+    
+    // Tool Header
+    const header = document.createElement('div');
+    header.className = 'tool-header';
+    
+    const icon = document.createElement('div');
+    icon.className = 'tool-icon';
+    icon.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+    icon.innerHTML = `<i class="${tool.iconClass || 'fas fa-tools'}"></i>`;
+    header.appendChild(icon);
+    
+    // Badge (optional)
+    if (tool.badge) {
+        const badge = document.createElement('span');
+        badge.className = `tool-badge ${tool.badge}`;
+        badge.textContent = tool.badge;
+        badge.setAttribute('data-en', tool.badge);
+        badge.setAttribute('data-ar', getBadgeArabic(tool.badge));
+        header.appendChild(badge);
+    }
+    
+    card.appendChild(header);
+    
+    // Tool Name
+    const name = document.createElement('h3');
+    name.className = 'tool-name';
+    name.textContent = tool.name;
+    card.appendChild(name);
+    
+    // Tool Description
+    const desc = document.createElement('p');
+    desc.className = 'tool-description';
+    desc.textContent = currentLang === 'en' ? tool.descriptionEn : tool.descriptionAr;
+    desc.setAttribute('data-en', tool.descriptionEn);
+    desc.setAttribute('data-ar', tool.descriptionAr);
+    card.appendChild(desc);
+    
+    // Features
+    if (tool.featuresEn && tool.featuresEn.length > 0) {
+        const features = document.createElement('div');
+        features.className = 'tool-features';
+        
+        tool.featuresEn.forEach((feature, index) => {
+            const tag = document.createElement('span');
+            tag.className = 'feature-tag';
+            tag.textContent = currentLang === 'en' ? feature : (tool.featuresAr[index] || feature);
+            tag.setAttribute('data-en', feature);
+            tag.setAttribute('data-ar', tool.featuresAr[index] || feature);
+            features.appendChild(tag);
+        });
+        
+        card.appendChild(features);
+    }
+    
+    // Platforms (for desktop/mobile)
+    if (type !== 'online' && tool.platforms && tool.platforms.length > 0) {
+        const platforms = document.createElement('div');
+        platforms.className = 'tool-platforms';
+        
+        tool.platforms.forEach(platform => {
+            const platformIcon = document.createElement('i');
+            platformIcon.className = getPlatformIcon(platform);
+            platforms.appendChild(platformIcon);
+        });
+        
+        card.appendChild(platforms);
+    }
+    
+    // Footer
+    const footer = document.createElement('div');
+    footer.className = 'tool-footer';
+    
+    const pricing = document.createElement('div');
+    pricing.className = 'tool-pricing';
+    pricing.innerHTML = `<i class="fas fa-tag"></i><span data-en="${getPricingLabel(tool.pricing)}" data-ar="${getPricingLabelAr(tool.pricing)}">${getPricingLabel(tool.pricing)}</span>`;
+    footer.appendChild(pricing);
+    
+    const link = document.createElement('a');
+    link.href = tool.url;
+    link.target = '_blank';
+    link.className = 'tool-link';
+    link.innerHTML = '<span data-en="Visit" data-ar="زيارة">Visit</span> <i class="fas fa-arrow-right"></i>';
+    footer.appendChild(link);
+    
+    card.appendChild(footer);
+    
+    return card;
+}
+
+function getBadgeArabic(badge) {
+    const badges = {
+        'popular': 'شائع',
+        'new': 'جديد',
+        'premium': 'مميز',
+        'trending': 'رائج'
+    };
+    return badges[badge?.toLowerCase()] || badge;
+}
+
+function getPlatformIcon(platform) {
+    const icons = {
+        'windows': 'fab fa-windows',
+        'mac': 'fab fa-apple',
+        'linux': 'fab fa-linux',
+        'android': 'fab fa-android',
+        'ios': 'fab fa-apple'
+    };
+    return icons[platform] || 'fas fa-desktop';
+}
+
+function getPricingLabel(pricing) {
+    const labels = {
+        'free': 'Free',
+        'freemium': 'Free + Paid',
+        'paid': 'Paid'
+    };
+    return labels[pricing] || pricing;
+}
+
+function getPricingLabelAr(pricing) {
+    const labels = {
+        'free': 'مجاني',
+        'freemium': 'مجاني + مدفوع',
+        'paid': 'مدفوع'
+    };
+    return labels[pricing] || pricing;
+}
+
+function updateStats(data) {
+    const onlineCount = data.online?.length || 0;
+    const desktopCount = data.desktop?.length || 0;
+    const mobileCount = data.mobile?.length || 0;
+    const extensionsCount = data.extensions?.length || 0;
+    
+    // Update stat numbers if elements exist
+    const stats = document.querySelectorAll('.stat-number');
+    if (stats[0]) stats[0].setAttribute('data-count', onlineCount);
+    if (stats[1]) stats[1].setAttribute('data-count', desktopCount);
+    if (stats[2]) stats[2].setAttribute('data-count', mobileCount);
+    if (stats[3]) stats[3].setAttribute('data-count', extensionsCount);
+}
+
 // Add hover effect to tool cards - Optimized with CSS
 function initCardEffects() {
     // Hover effects are now handled purely by CSS for better performance
@@ -308,6 +523,9 @@ function initToolRating() {
 
 // Initialize all features when DOM is ready - Optimized
 document.addEventListener('DOMContentLoaded', () => {
+    // Load tools from JSON first
+    loadToolsFromJSON();
+    
     // Critical initializations first
     loadLanguagePreference();
     initLanguageToggle();

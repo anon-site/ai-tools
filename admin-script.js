@@ -62,18 +62,58 @@ function showGithubModal() {
 function updateGithubStatus(connected) {
     const statusEl = document.getElementById('githubStatus');
     const statusContainer = statusEl.parentElement;
+    const logoutBtn = document.getElementById('logoutGithub');
     
     if (connected) {
         statusContainer.classList.add('connected');
         statusEl.textContent = 'Connected';
         statusEl.setAttribute('data-en', 'Connected');
         statusEl.setAttribute('data-ar', 'متصل');
+        logoutBtn.style.display = 'flex';
     } else {
         statusContainer.classList.remove('connected');
         statusEl.textContent = 'Not Connected';
         statusEl.setAttribute('data-en', 'Not Connected');
         statusEl.setAttribute('data-ar', 'غير متصل');
+        logoutBtn.style.display = 'none';
     }
+}
+
+function logoutFromGithub() {
+    if (confirm(currentLang === 'en' ? 
+        'Are you sure you want to disconnect from GitHub? Local data will be kept.' : 
+        'هل أنت متأكد من قطع الاتصال مع GitHub؟ سيتم الاحتفاظ بالبيانات المحلية.')) {
+        
+        // Clear GitHub config
+        githubConfig = {
+            owner: '',
+            repo: '',
+            token: '',
+            branch: 'main'
+        };
+        
+        // Remove from localStorage
+        localStorage.removeItem('githubConfig');
+        
+        // Update UI
+        updateGithubStatus(false);
+        
+        // Show success message
+        showToast(currentLang === 'en' ? 
+            'Disconnected from GitHub successfully. You can continue working with local storage.' : 
+            'تم قطع الاتصال مع GitHub بنجاح. يمكنك المتابعة بالتخزين المحلي.', 'success');
+    }
+}
+
+// ===== Helper Functions for Unicode Support =====
+function utf8ToBase64(str) {
+    // Convert UTF-8 string to Base64 (supports Unicode/Arabic)
+    return btoa(unescape(encodeURIComponent(str)));
+}
+
+function base64ToUtf8(str) {
+    // Convert Base64 to UTF-8 string (supports Unicode/Arabic)
+    return decodeURIComponent(escape(atob(str)));
 }
 
 // ===== GitHub API Functions =====
@@ -187,7 +227,7 @@ async function githubRequest(endpoint, method = 'GET', data = null) {
 async function getFileFromGithub(path) {
     try {
         const response = await githubRequest(`contents/${path}`);
-        const content = atob(response.content);
+        const content = base64ToUtf8(response.content);
         return {
             content: JSON.parse(content),
             sha: response.sha
@@ -204,7 +244,7 @@ async function getFileFromGithub(path) {
 async function updateFileOnGithub(path, content, sha, message) {
     const data = {
         message: message,
-        content: btoa(JSON.stringify(content, null, 2)),
+        content: utf8ToBase64(JSON.stringify(content, null, 2)),
         branch: githubConfig.branch
     };
     
@@ -296,7 +336,7 @@ function renderToolsTable() {
     tbody.innerHTML = tools.map((tool, index) => `
         <tr>
             <td>
-                <div class="tool-icon-cell" style="background: ${tool.iconGradient || '#667eea'}">
+                <div class="tool-icon-cell" style="background: linear-gradient(135deg, #667eea, #764ba2)">
                     <i class="${tool.iconClass || 'fas fa-tools'}"></i>
                 </div>
             </td>
@@ -358,9 +398,7 @@ function editTool(index) {
     document.getElementById('sectionSelect').value = currentSection;
     document.getElementById('categorySelect').value = tool.category || '';
     document.getElementById('pricingSelect').value = tool.pricing;
-    document.getElementById('badgeSelect').value = tool.badge || '';
     document.getElementById('iconClass').value = tool.iconClass;
-    document.getElementById('iconGradient').value = tool.iconGradient;
     document.getElementById('featuresEn').value = tool.featuresEn ? tool.featuresEn.join(', ') : '';
     document.getElementById('featuresAr').value = tool.featuresAr ? tool.featuresAr.join(', ') : '';
     
@@ -387,9 +425,7 @@ function saveTool(event) {
         section: document.getElementById('sectionSelect').value,
         category: document.getElementById('categorySelect').value,
         pricing: document.getElementById('pricingSelect').value,
-        badge: document.getElementById('badgeSelect').value,
         iconClass: document.getElementById('iconClass').value,
-        iconGradient: document.getElementById('iconGradient').value,
         featuresEn: document.getElementById('featuresEn').value.split(',').map(f => f.trim()).filter(f => f),
         featuresAr: document.getElementById('featuresAr').value.split(',').map(f => f.trim()).filter(f => f),
         platforms: Array.from(document.querySelectorAll('input[name="platforms"]:checked')).map(cb => cb.value)
@@ -596,7 +632,7 @@ function searchTools() {
             return `
                 <tr>
                     <td>
-                        <div class="tool-icon-cell" style="background: ${tool.iconGradient || '#667eea'}">
+                        <div class="tool-icon-cell" style="background: linear-gradient(135deg, #667eea, #764ba2)">
                             <i class="${tool.iconClass || 'fas fa-tools'}"></i>
                         </div>
                     </td>
@@ -769,6 +805,9 @@ function initializeEventListeners() {
     document.getElementById('cancelGithub').addEventListener('click', closeGithubModal);
     document.getElementById('closeGithubModal').addEventListener('click', closeGithubModal);
     
+    // Logout from GitHub
+    document.getElementById('logoutGithub').addEventListener('click', logoutFromGithub);
+    
     // Import/Export
     document.getElementById('exportData').addEventListener('click', exportData);
     document.getElementById('importDataBtn').addEventListener('click', () => {
@@ -792,12 +831,5 @@ function initializeEventListeners() {
         updateLanguage();
     });
     
-    // Close modals on outside click
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-    });
+    // Note: Modals can only be closed via close button (removed outside click handler)
 }
