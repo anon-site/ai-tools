@@ -53,6 +53,90 @@
     transform: rotate(180deg);
 }
 
+/* Manual Sync Button */
+.btn-manual-sync {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    font-weight: 600;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-manual-sync:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-manual-sync:active {
+    transform: translateY(0);
+}
+
+.btn-manual-sync.syncing {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-manual-sync.syncing i {
+    animation: rotate 1s linear infinite;
+}
+
+.btn-manual-sync.has-changes {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.6);
+    }
+}
+
+.unsaved-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 12px;
+    height: 12px;
+    background: #ef4444;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse-badge 1.5s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+@keyframes pulse-badge {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
 /* Admin Container */
 .admin-container {
     display: flex;

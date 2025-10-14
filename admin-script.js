@@ -17,6 +17,7 @@ let githubConfig = {
     token: '',
     branch: 'main'
 };
+let hasUnsavedChanges = false; // Track unsaved changes
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,18 +29,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== GitHub Configuration =====
 function loadGithubConfig() {
-    const saved = localStorage.getItem('githubConfig');
-    if (saved) {
-        githubConfig = JSON.parse(saved);
-        updateGithubStatus(true);
-    } else {
-        // Show GitHub settings modal on first load
+    // Try to load from localStorage if user chose "Remember Me"
+    const savedConfig = localStorage.getItem('githubConfig');
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+    
+    if (savedConfig && rememberMe) {
+        try {
+            githubConfig = JSON.parse(savedConfig);
+            updateGithubStatus(true);
+            return;
+        } catch (error) {
+            console.error('Failed to load saved config:', error);
+        }
+    }
+    
+    // Show GitHub modal on first load if not configured
+    if (!githubConfig.owner || !githubConfig.repo || !githubConfig.token) {
         setTimeout(() => showGithubModal(), 1000);
+    } else {
+        updateGithubStatus(true);
     }
 }
 
-function saveGithubConfig() {
-    localStorage.setItem('githubConfig', JSON.stringify(githubConfig));
+function saveGithubConfig(rememberMe = false) {
+    if (rememberMe) {
+        // Save to localStorage if user wants to be remembered
+        localStorage.setItem('githubConfig', JSON.stringify(githubConfig));
+        localStorage.setItem('rememberMe', 'true');
+    } else {
+        // Clear from localStorage
+        localStorage.removeItem('githubConfig');
+        localStorage.removeItem('rememberMe');
+    }
 }
 
 function showGithubModal() {
@@ -48,6 +69,10 @@ function showGithubModal() {
     
     // Populate token field
     document.getElementById('githubToken').value = githubConfig.token || '';
+    
+    // Set Remember Me checkbox state
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+    document.getElementById('rememberMe').checked = rememberMe;
     
     // Show detected repo info if available
     if (githubConfig.owner && githubConfig.repo) {
@@ -63,6 +88,7 @@ function updateGithubStatus(connected) {
     const statusEl = document.getElementById('githubStatus');
     const statusContainer = statusEl.parentElement;
     const logoutBtn = document.getElementById('logoutGithub');
+    const manualSyncBtn = document.getElementById('manualSyncButton');
     
     if (connected) {
         statusContainer.classList.add('connected');
@@ -70,21 +96,23 @@ function updateGithubStatus(connected) {
         statusEl.setAttribute('data-en', 'Connected');
         statusEl.setAttribute('data-ar', 'متصل');
         logoutBtn.style.display = 'flex';
+        manualSyncBtn.style.display = 'flex';
     } else {
         statusContainer.classList.remove('connected');
         statusEl.textContent = 'Not Connected';
         statusEl.setAttribute('data-en', 'Not Connected');
         statusEl.setAttribute('data-ar', 'غير متصل');
         logoutBtn.style.display = 'none';
+        manualSyncBtn.style.display = 'none';
     }
 }
 
 function logoutFromGithub() {
     if (confirm(currentLang === 'en' ? 
-        'Are you sure you want to disconnect from GitHub? Local data will be kept.' : 
-        'هل أنت متأكد من قطع الاتصال مع GitHub؟ سيتم الاحتفاظ بالبيانات المحلية.')) {
+        'Are you sure you want to disconnect from GitHub? You will need to reconnect to access your data.' : 
+        'هل أنت متأكد من قطع الاتصال مع GitHub؟ ستحتاج إلى إعادة الاتصال للوصول إلى بياناتك.')) {
         
-        // Clear GitHub config
+        // Clear GitHub config from memory
         githubConfig = {
             owner: '',
             repo: '',
@@ -92,16 +120,27 @@ function logoutFromGithub() {
             branch: 'main'
         };
         
-        // Remove from localStorage
+        // Clear from localStorage
         localStorage.removeItem('githubConfig');
+        localStorage.removeItem('rememberMe');
+        
+        // Clear tools data
+        toolsData = {
+            online: [],
+            desktop: [],
+            mobile: [],
+            extensions: []
+        };
         
         // Update UI
         updateGithubStatus(false);
+        updateStats();
+        renderToolsTable();
         
         // Show success message
         showToast(currentLang === 'en' ? 
-            'Disconnected from GitHub successfully. You can continue working with local storage.' : 
-            'تم قطع الاتصال مع GitHub بنجاح. يمكنك المتابعة بالتخزين المحلي.', 'success');
+            'Disconnected from GitHub successfully. Connect again to access your data.' : 
+            'تم قطع الاتصال مع GitHub بنجاح. اتصل مرة أخرى للوصول إلى بياناتك.', 'success');
     }
 }
 
@@ -263,18 +302,18 @@ async function loadToolsData() {
         if (githubConfig.owner && githubConfig.repo && githubConfig.token) {
             const result = await getFileFromGithub('data/tools.json');
             toolsData = result.content;
+            hasUnsavedChanges = false; // Reset after loading from GitHub
+            updateUnsavedIndicator();
+            updateStats();
+            renderToolsTable();
+            hideLoading();
+            showToast('Tools loaded successfully', 'success');
         } else {
-            // Load from localStorage as fallback
-            const saved = localStorage.getItem('toolsData');
-            if (saved) {
-                toolsData = JSON.parse(saved);
-            }
+            hideLoading();
+            showToast(currentLang === 'en' ? 
+                'Please connect to GitHub to load your tools.' : 
+                'يرجى الاتصال بـ GitHub لتحميل أدواتك.', 'info');
         }
-        
-        updateStats();
-        renderToolsTable();
-        hideLoading();
-        showToast('Tools loaded successfully', 'success');
     } catch (error) {
         hideLoading();
         showToast('Failed to load tools: ' + error.message, 'error');
@@ -283,29 +322,82 @@ async function loadToolsData() {
 }
 
 async function saveToolsData(message = 'Update tools data') {
-    showLoading('Saving to GitHub...');
+    // Save locally only (in memory)
+    hasUnsavedChanges = true;
+    updateUnsavedIndicator();
+    updateStats();
+    renderToolsTable();
+    
+    showToast(currentLang === 'en' ? 
+        'Changes saved locally. Click "Sync Now" to upload to GitHub.' : 
+        'تم حفظ التغييرات محليًا. اضغط "مزامنة الآن" للرفع إلى GitHub.', 'info');
+}
+
+// Manual Sync to GitHub
+async function manualSyncToGithub() {
+    if (!githubConfig.owner || !githubConfig.repo || !githubConfig.token) {
+        showToast(currentLang === 'en' ? 
+            'Please connect to GitHub first.' : 
+            'يرجى الاتصال بـ GitHub أولًا.', 'error');
+        return;
+    }
+    
+    if (!hasUnsavedChanges) {
+        showToast(currentLang === 'en' ? 
+            'No changes to sync.' : 
+            'لا توجد تغييرات للمزامنة.', 'info');
+        return;
+    }
+    
+    const syncBtn = document.getElementById('manualSyncButton');
+    syncBtn.classList.add('syncing');
+    
+    showLoading('Syncing to GitHub...');
     
     try {
-        if (githubConfig.owner && githubConfig.repo && githubConfig.token) {
-            // Get current file SHA
-            const result = await getFileFromGithub('data/tools.json');
-            
-            // Update file on GitHub
-            await updateFileOnGithub('data/tools.json', toolsData, result.sha, message);
-            showToast('Saved to GitHub successfully', 'success');
-        } else {
-            // Save to localStorage as fallback
-            localStorage.setItem('toolsData', JSON.stringify(toolsData));
-            showToast('Saved locally (GitHub not configured)', 'info');
-        }
+        // Get current file SHA
+        const result = await getFileFromGithub('data/tools.json');
         
-        updateStats();
-        renderToolsTable();
+        // Update file on GitHub
+        await updateFileOnGithub(
+            'data/tools.json', 
+            toolsData, 
+            result.sha, 
+            'Manual sync: Update tools data'
+        );
+        
+        // Reset unsaved changes flag
+        hasUnsavedChanges = false;
+        updateUnsavedIndicator();
+        
         hideLoading();
+        syncBtn.classList.remove('syncing');
+        
+        showToast(currentLang === 'en' ? 
+            'Successfully synced to GitHub!' : 
+            'تمت المزامنة مع GitHub بنجاح!', 'success');
+        
     } catch (error) {
         hideLoading();
-        showToast('Failed to save: ' + error.message, 'error');
+        syncBtn.classList.remove('syncing');
+        showToast(currentLang === 'en' ? 
+            'Failed to sync: ' + error.message : 
+            'فشلت المزامنة: ' + error.message, 'error');
         console.error(error);
+    }
+}
+
+// Update unsaved changes indicator
+function updateUnsavedIndicator() {
+    const syncBtn = document.getElementById('manualSyncButton');
+    const unsavedBadge = document.getElementById('unsavedBadge');
+    
+    if (hasUnsavedChanges) {
+        syncBtn.classList.add('has-changes');
+        unsavedBadge.style.display = 'flex';
+    } else {
+        syncBtn.classList.remove('has-changes');
+        unsavedBadge.style.display = 'none';
     }
 }
 
@@ -769,6 +861,7 @@ function initializeEventListeners() {
     
     document.getElementById('saveGithub').addEventListener('click', async () => {
         const token = document.getElementById('githubToken').value.trim();
+        const rememberMe = document.getElementById('rememberMe').checked;
         
         if (!token) {
             showToast('Please enter GitHub token', 'error');
@@ -786,12 +879,22 @@ function initializeEventListeners() {
             }
             
             if (githubConfig.owner && githubConfig.repo && githubConfig.token) {
-                saveGithubConfig();
+                // Save config with Remember Me option
+                saveGithubConfig(rememberMe);
                 updateGithubStatus(true);
                 closeGithubModal();
                 hideLoading();
                 loadToolsData();
-                showToast('GitHub connected successfully', 'success');
+                
+                const message = rememberMe ? 
+                    (currentLang === 'en' ? 
+                        'GitHub connected successfully! You will stay signed in.' : 
+                        'تم الاتصال بـ GitHub بنجاح! ستبقى متصلاً.') :
+                    (currentLang === 'en' ? 
+                        'GitHub connected successfully! You will need to sign in again after closing the browser.' : 
+                        'تم الاتصال بـ GitHub بنجاح! ستحتاج للتسجيل مجددًا بعد إغلاق المتصفح.');
+                
+                showToast(message, 'success');
             } else {
                 hideLoading();
                 showToast('Failed to detect repository', 'error');
@@ -807,6 +910,9 @@ function initializeEventListeners() {
     
     // Logout from GitHub
     document.getElementById('logoutGithub').addEventListener('click', logoutFromGithub);
+    
+    // Manual Sync Button
+    document.getElementById('manualSyncButton').addEventListener('click', manualSyncToGithub);
     
     // Import/Export
     document.getElementById('exportData').addEventListener('click', exportData);
@@ -829,6 +935,15 @@ function initializeEventListeners() {
         currentLang = currentLang === 'en' ? 'ar' : 'en';
         document.getElementById('adminLangText').textContent = currentLang === 'en' ? 'العربية' : 'English';
         updateLanguage();
+    });
+    
+    // Warn before leaving page with unsaved changes
+    window.addEventListener('beforeunload', (e) => {
+        if (hasUnsavedChanges) {
+            e.preventDefault();
+            e.returnValue = '';
+            return '';
+        }
     });
     
     // Note: Modals can only be closed via close button (removed outside click handler)
