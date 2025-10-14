@@ -244,8 +244,12 @@ async function githubRequest(endpoint, method = 'GET', data = null) {
         headers: {
             'Authorization': `token ${githubConfig.token}`,
             'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-        }
+            'Accept': 'application/vnd.github.v3+json',
+            // Prevent caching
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+        },
+        cache: 'no-store' // Force fetch from server
     };
     
     if (data) {

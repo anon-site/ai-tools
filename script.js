@@ -197,7 +197,16 @@ function animateValue(element, start, end, duration) {
 // Load Tools from JSON
 async function loadToolsFromJSON() {
     try {
-        const response = await fetch('data/tools.json');
+        // Add timestamp to prevent caching (cache-busting)
+        const timestamp = new Date().getTime();
+        const response = await fetch(`data/tools.json?v=${timestamp}`, {
+            cache: 'no-store', // Prevent browser caching
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        });
         const data = await response.json();
         
         // Render tools for each section
