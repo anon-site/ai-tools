@@ -1,152 +1,637 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Complete collection of AI tools for online, desktop, mobile, and browser extensions">
-    <meta name="keywords" content="AI tools, artificial intelligence, chrome extensions, android apps, iOS apps">
+    <meta name="description" content="AI Tools Hub - مركز شامل لأدوات الذكاء الاصطناعي">
     <title>AI Tools Hub - مركز أدوات الذكاء الاصطناعي</title>
-    
-    <!-- Preconnect to external resources -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Critical CSS -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Async load fonts for faster initial render -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap"></noscript>
-    
-    <!-- Async load Font Awesome -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Language Toggle & Header -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="container">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
                 <div class="logo">
                     <i class="fas fa-brain"></i>
-                    <span class="logo-text" data-en="AI Tools Hub" data-ar="مركز أدوات الذكاء الاصطناعي">AI Tools Hub</span>
+                    <span class="logo-text" data-ar="مركز أدوات الذكاء الاصطناعي" data-en="AI Tools Hub">مركز أدوات الذكاء الاصطناعي</span>
                 </div>
-                
-                <div class="nav-links">
-                    <a href="#online" data-en="Online Tools" data-ar="أدوات أونلاين">Online Tools</a>
-                    <a href="#desktop" data-en="Desktop Apps" data-ar="تطبيقات سطح المكتب">Desktop Apps</a>
-                    <a href="#mobile" data-en="Mobile Apps" data-ar="تطبيقات الجوال">Mobile Apps</a>
-                    <a href="#extensions" data-en="Extensions" data-ar="الإضافات">Extensions</a>
-                    <button class="lang-toggle" id="langToggle">
-                        <i class="fas fa-language"></i>
-                        <span id="langText">العربية</span>
-                    </button>
-                </div>
-                
-                <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <i class="fas fa-bars"></i>
-                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                    <li><a href="#web-tools" data-ar="أدوات الويب" data-en="Web Tools">أدوات الويب</a></li>
+                    <li><a href="#desktop-apps" data-ar="برامج الكمبيوتر" data-en="Desktop Apps">برامج الكمبيوتر</a></li>
+                    <li><a href="#mobile-apps" data-ar="تطبيقات الموبايل" data-en="Mobile Apps">تطبيقات الموبايل</a></li>
+                    <li><a href="#ai-models" data-ar="نماذج الذكاء الاصطناعي" data-en="AI Models">نماذج الذكاء الاصطناعي</a></li>
+                    <li><a href="#resources" data-ar="مصادر تعليمية" data-en="Resources">مصادر تعليمية</a></li>
+                    <li>
+                        <button class="lang-toggle" id="langToggle">
+                            <i class="fas fa-language"></i>
+                            <span data-ar="English" data-en="عربي">English</span>
+                        </button>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title" data-en="Discover the Best AI Tools" data-ar="اكتشف أفضل أدوات الذكاء الاصطناعي">Discover the Best AI Tools</h1>
-            <p class="hero-subtitle" data-en="Your complete guide to artificial intelligence tools across all platforms" data-ar="دليلك الشامل لأدوات الذكاء الاصطناعي على جميع المنصات">Your complete guide to artificial intelligence tools across all platforms</p>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search for AI tools..." data-placeholder-en="Search for AI tools..." data-placeholder-ar="ابحث عن أدوات الذكاء الاصطناعي...">
-            </div>
-            
-            <div class="hero-animation">
-                <div class="floating-icons">
-                    <i class="fas fa-robot"></i>
-                    <i class="fas fa-microchip"></i>
-                    <i class="fas fa-code"></i>
-                    <i class="fas fa-brain"></i>
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-particles"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title" data-ar="اكتشف عالم الذكاء الاصطناعي" data-en="Discover the World of AI">اكتشف عالم الذكاء الاصطناعي</h1>
+                <p class="hero-subtitle" data-ar="مركزك الشامل لأفضل أدوات وتطبيقات الذكاء الاصطناعي" data-en="Your Complete Hub for the Best AI Tools and Applications">مركزك الشامل لأفضل أدوات وتطبيقات الذكاء الاصطناعي</p>
+                <div class="hero-buttons">
+                    <a href="#web-tools" class="btn btn-primary" data-ar="استكشف الأدوات" data-en="Explore Tools">استكشف الأدوات</a>
+                    <a href="#resources" class="btn btn-secondary" data-ar="مصادر التعلم" data-en="Learning Resources">مصادر التعلم</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>200+</h3>
+                        <p data-ar="أداة ذكاء اصطناعي" data-en="AI Tools">أداة ذكاء اصطناعي</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p data-ar="تطبيق موبايل" data-en="Mobile Apps">تطبيق موبايل</p>
+                    </div>
+                    <div class="stat">
+                        <h3>100+</h3>
+                        <p data-ar="برنامج كمبيوتر" data-en="Desktop Apps">برنامج كمبيوتر</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Statistics Section -->
-    <section class="stats-section">
+    <!-- Web Tools Section -->
+    <section class="section" id="web-tools">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <i class="fas fa-globe"></i>
-                    <h3 class="stat-number" data-count="150">150+</h3>
-                    <p data-en="Online Tools" data-ar="أداة أونلاين">Online Tools</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-desktop"></i>
-                    <h3 class="stat-number" data-count="80">80+</h3>
-                    <p data-en="Desktop Apps" data-ar="تطبيق سطح المكتب">Desktop Apps</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3 class="stat-number" data-count="120">120+</h3>
-                    <p data-en="Mobile Apps" data-ar="تطبيق جوال">Mobile Apps</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-puzzle-piece"></i>
-                    <h3 class="stat-number" data-count="200">200+</h3>
-                    <p data-en="Extensions" data-ar="إضافة">Extensions</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Online Tools Section -->
-    <section id="online" class="tools-section">
-        <div class="container">
-            <h2 class="section-title" data-en="Online AI Tools" data-ar="أدوات الذكاء الاصطناعي الأونلاين">Online AI Tools</h2>
-            <div class="category-tabs">
-                <button class="tab-btn active" data-category="all" data-en="All" data-ar="الكل">All</button>
-                <button class="tab-btn" data-category="text" data-en="Text Generation" data-ar="توليد النصوص">Text Generation</button>
-                <button class="tab-btn" data-category="image" data-en="Image Creation" data-ar="إنشاء الصور">Image Creation</button>
-                <button class="tab-btn" data-category="video" data-en="Video Editing" data-ar="تحرير الفيديو">Video Editing</button>
-                <button class="tab-btn" data-category="audio" data-en="Audio Processing" data-ar="معالجة الصوت">Audio Processing</button>
+            <div class="section-header">
+                <h2 data-ar="أدوات الذكاء الاصطناعي على الويب" data-en="AI Web Tools">أدوات الذكاء الاصطناعي على الويب</h2>
+                <p data-ar="أفضل الأدوات والمواقع للذكاء الاصطناعي المتاحة أونلاين" data-en="Best Online AI Tools and Websites">أفضل الأدوات والمواقع للذكاء الاصطناعي المتاحة أونلاين</p>
             </div>
 
-            <div class="tools-grid" id="onlineToolsGrid">
-                <!-- Tools will be loaded dynamically from data/tools.json -->
+            <!-- Text Generation Category -->
+            <div class="category">
+                <h3 class="category-title" data-ar="🤖 توليد النصوص والمحادثة" data-en="🤖 Text Generation & Chat">🤖 توليد النصوص والمحادثة</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-comments"></i></div>
+                        <h4>ChatGPT</h4>
+                        <p data-ar="محادثات ذكية وإنشاء محتوى متقدم من OpenAI" data-en="Smart conversations and advanced content creation">محادثات ذكية وإنشاء محتوى متقدم من OpenAI</p>
+                        <a href="https://chat.openai.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                        <h4>Claude AI</h4>
+                        <p data-ar="مساعد ذكي متطور للمحادثات والتحليل" data-en="Advanced AI assistant for conversations and analysis">مساعد ذكي متطور للمحادثات والتحليل</p>
+                        <a href="https://claude.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-sparkles"></i></div>
+                        <h4>Google Gemini</h4>
+                        <p data-ar="نموذج الذكاء الاصطناعي المتقدم من Google" data-en="Advanced AI model from Google">نموذج الذكاء الاصطناعي المتقدم من Google</p>
+                        <a href="https://gemini.google.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-brain"></i></div>
+                        <h4>Perplexity AI</h4>
+                        <p data-ar="محرك بحث ذكي بالذكاء الاصطناعي" data-en="AI-powered search engine">محرك بحث ذكي بالذكاء الاصطناعي</p>
+                        <a href="https://www.perplexity.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-feather"></i></div>
+                        <h4>Jasper AI</h4>
+                        <p data-ar="كتابة محتوى تسويقي احترافي بالذكاء الاصطناعي" data-en="Professional AI marketing content writer">كتابة محتوى تسويقي احترافي بالذكاء الاصطناعي</p>
+                        <a href="https://www.jasper.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-pen-fancy"></i></div>
+                        <h4>Copy.ai</h4>
+                        <p data-ar="إنشاء نصوص إعلانية وتسويقية بسرعة" data-en="Fast advertising and marketing copy generation">إنشاء نصوص إعلانية وتسويقية بسرعة</p>
+                        <a href="https://www.copy.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Generation Category -->
+            <div class="category">
+                <h3 class="category-title" data-ar="🎨 توليد وتحرير الصور" data-en="🎨 Image Generation & Editing">🎨 توليد وتحرير الصور</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-image"></i></div>
+                        <h4>Midjourney</h4>
+                        <p data-ar="توليد صور فنية عالية الجودة بالذكاء الاصطناعي" data-en="High-quality artistic AI image generation">توليد صور فنية عالية الجودة بالذكاء الاصطناعي</p>
+                        <a href="https://www.midjourney.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-palette"></i></div>
+                        <h4>DALL-E 3</h4>
+                        <p data-ar="إنشاء صور واقعية من النصوص" data-en="Create realistic images from text">إنشاء صور واقعية من النصوص</p>
+                        <a href="https://openai.com/dall-e-3" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-paint-brush"></i></div>
+                        <h4>Stable Diffusion</h4>
+                        <p data-ar="نموذج مفتوح المصدر لتوليد الصور" data-en="Open-source image generation model">نموذج مفتوح المصدر لتوليد الصور</p>
+                        <a href="https://stablediffusionweb.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-magic"></i></div>
+                        <h4>Leonardo AI</h4>
+                        <p data-ar="توليد صور للألعاب والرسوم المتحركة" data-en="AI image generation for games and animation">توليد صور للألعاب والرسوم المتحركة</p>
+                        <a href="https://leonardo.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                        <h4>Adobe Firefly</h4>
+                        <p data-ar="توليد وتحرير الصور من Adobe" data-en="Image generation and editing from Adobe">توليد وتحرير الصور من Adobe</p>
+                        <a href="https://firefly.adobe.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-expand"></i></div>
+                        <h4>Upscale.media</h4>
+                        <p data-ar="تحسين جودة الصور وتكبيرها" data-en="Enhance and upscale image quality">تحسين جودة الصور وتكبيرها</p>
+                        <a href="https://www.upscale.media" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-eraser"></i></div>
+                        <h4>Remove.bg</h4>
+                        <p data-ar="إزالة خلفية الصور تلقائياً" data-en="Automatic background removal">إزالة خلفية الصور تلقائياً</p>
+                        <a href="https://www.remove.bg" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-crop"></i></div>
+                        <h4>Cleanup.pictures</h4>
+                        <p data-ar="إزالة العناصر غير المرغوبة من الصور" data-en="Remove unwanted objects from images">إزالة العناصر غير المرغوبة من الصور</p>
+                        <a href="https://cleanup.pictures" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Tools Category -->
+            <div class="category">
+                <h3 class="category-title" data-ar="🎬 توليد وتحرير الفيديو" data-en="🎬 Video Generation & Editing">🎬 توليد وتحرير الفيديو</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-video"></i></div>
+                        <h4>Runway ML</h4>
+                        <p data-ar="تحرير فيديو متقدم بالذكاء الاصطناعي" data-en="Advanced AI video editing">تحرير فيديو متقدم بالذكاء الاصطناعي</p>
+                        <a href="https://runwayml.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-film"></i></div>
+                        <h4>Synthesia</h4>
+                        <p data-ar="إنشاء فيديوهات بشخصيات افتراضية" data-en="Create videos with AI avatars">إنشاء فيديوهات بشخصيات افتراضية</p>
+                        <a href="https://www.synthesia.io" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-clapperboard"></i></div>
+                        <h4>Pictory AI</h4>
+                        <p data-ar="تحويل النصوص إلى فيديوهات احترافية" data-en="Convert text to professional videos">تحويل النصوص إلى فيديوهات احترافية</p>
+                        <a href="https://pictory.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-person-chalkboard"></i></div>
+                        <h4>Descript</h4>
+                        <p data-ar="تحرير الفيديو والصوت بسهولة" data-en="Easy video and audio editing">تحرير الفيديو والصوت بسهولة</p>
+                        <a href="https://www.descript.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio & Voice Category -->
+            <div class="category">
+                <h3 class="category-title" data-ar="🎙️ الصوت والموسيقى" data-en="🎙️ Audio & Music">🎙️ الصوت والموسيقى</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-microphone"></i></div>
+                        <h4>ElevenLabs</h4>
+                        <p data-ar="توليد أصوات واقعية بالذكاء الاصطناعي" data-en="Generate realistic AI voices">توليد أصوات واقعية بالذكاء الاصطناعي</p>
+                        <a href="https://elevenlabs.io" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-music"></i></div>
+                        <h4>Mubert</h4>
+                        <p data-ar="إنشاء موسيقى بالذكاء الاصطناعي" data-en="AI music generation">إنشاء موسيقى بالذكاء الاصطناعي</p>
+                        <a href="https://mubert.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-headphones"></i></div>
+                        <h4>AIVA</h4>
+                        <p data-ar="تأليف موسيقى بالذكاء الاصطناعي" data-en="AI music composition">تأليف موسيقى بالذكاء الاصطناعي</p>
+                        <a href="https://www.aiva.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-wave-square"></i></div>
+                        <h4>Speechify</h4>
+                        <p data-ar="تحويل النصوص إلى كلام طبيعي" data-en="Convert text to natural speech">تحويل النصوص إلى كلام طبيعي</p>
+                        <a href="https://speechify.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code & Development Category -->
+            <div class="category">
+                <h3 class="category-title" data-ar="💻 البرمجة والتطوير" data-en="💻 Code & Development">💻 البرمجة والتطوير</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-code"></i></div>
+                        <h4>GitHub Copilot</h4>
+                        <p data-ar="مساعد برمجة ذكي من GitHub" data-en="AI programming assistant from GitHub">مساعد برمجة ذكي من GitHub</p>
+                        <a href="https://github.com/features/copilot" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-terminal"></i></div>
+                        <h4>Tabnine</h4>
+                        <p data-ar="إكمال الأكواد البرمجية تلقائياً" data-en="AI code completion">إكمال الأكواد البرمجية تلقائياً</p>
+                        <a href="https://www.tabnine.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h4>Replit AI</h4>
+                        <p data-ar="بيئة تطوير متكاملة بالذكاء الاصطناعي" data-en="AI-powered development environment">بيئة تطوير متكاملة بالذكاء الاصطناعي</p>
+                        <a href="https://replit.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-file-code"></i></div>
+                        <h4>Codeium</h4>
+                        <p data-ar="إكمال أكواد مجاني بالذكاء الاصطناعي" data-en="Free AI code completion">إكمال أكواد مجاني بالذكاء الاصطناعي</p>
+                        <a href="https://codeium.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Productivity Tools Category -->
+            <div class="category">
+                <h3 class="category-title" data-ar="📊 الإنتاجية والأعمال" data-en="📊 Productivity & Business">📊 الإنتاجية والأعمال</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-notebook"></i></div>
+                        <h4>Notion AI</h4>
+                        <p data-ar="مساحة عمل ذكية بالذكاء الاصطناعي" data-en="AI-powered smart workspace">مساحة عمل ذكية بالذكاء الاصطناعي</p>
+                        <a href="https://www.notion.so/product/ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4>Beautiful.ai</h4>
+                        <p data-ar="إنشاء عروض تقديمية احترافية" data-en="Create professional presentations">إنشاء عروض تقديمية احترافية</p>
+                        <a href="https://www.beautiful.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-envelope"></i></div>
+                        <h4>Superhuman</h4>
+                        <p data-ar="إدارة البريد الإلكتروني بذكاء" data-en="Smart email management">إدارة البريد الإلكتروني بذكاء</p>
+                        <a href="https://superhuman.com" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-calendar"></i></div>
+                        <h4>Reclaim AI</h4>
+                        <p data-ar="تنظيم الجدول الزمني تلقائياً" data-en="Automatic schedule organization">تنظيم الجدول الزمني تلقائياً</p>
+                        <a href="https://reclaim.ai" target="_blank" class="tool-link" data-ar="زيارة الموقع" data-en="Visit Site">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Desktop Apps Section -->
-    <section id="desktop" class="tools-section alt-bg">
+    <section class="section section-alt" id="desktop-apps">
         <div class="container">
-            <h2 class="section-title" data-en="Desktop Applications" data-ar="تطبيقات سطح المكتب">Desktop Applications</h2>
-            
-            <div class="tools-grid" id="desktopGrid">
-                <!-- Desktop tools will be loaded dynamically from data/tools.json -->
+            <div class="section-header">
+                <h2 data-ar="برامج الكمبيوتر بالذكاء الاصطناعي" data-en="Desktop AI Applications">برامج الكمبيوتر بالذكاء الاصطناعي</h2>
+                <p data-ar="أقوى برامج الذكاء الاصطناعي لأنظمة Windows و Mac و Linux" data-en="Powerful AI software for Windows, Mac, and Linux">أقوى برامج الذكاء الاصطناعي لأنظمة Windows و Mac و Linux</p>
+            </div>
+
+            <div class="category">
+                <h3 class="category-title" data-ar="🖥️ برامج Windows" data-en="🖥️ Windows Applications">🖥️ برامج Windows</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fab fa-windows"></i></div>
+                        <h4>Topaz Photo AI</h4>
+                        <p data-ar="تحسين جودة الصور احترافياً" data-en="Professional photo enhancement">تحسين جودة الصور احترافياً</p>
+                        <span class="tool-platform">Windows / Mac</span>
+                        <a href="https://www.topazlabs.com/topaz-photo-ai" target="_blank" class="tool-link" data-ar="تحميل" data-en="Download">تحميل <i class="fas fa-download"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fab fa-windows"></i></div>
+                        <h4>Adobe Photoshop AI</h4>
+                        <p data-ar="برنامج تحرير الصور بميزات ذكاء اصطناعي" data-en="Photo editing with AI features">برنامج تحرير الصور بميزات ذكاء اصطناعي</p>
+                        <span class="tool-platform">Windows / Mac</span>
+                        <a href="https://www.adobe.com/products/photoshop.html" target="_blank" class="tool-link" data-ar="تحميل" data-en="Download">تحميل <i class="fas fa-download"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fab fa-windows"></i></div>
+                        <h4>DaVinci Resolve</h4>
+                        <p data-ar="تحرير فيديو احترافي مع AI" data-en="Professional video editing with AI">تحرير فيديو احترافي مع AI</p>
+                        <span class="tool-platform">Windows / Mac / Linux</span>
+                        <a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" class="tool-link" data-ar="تحميل" data-en="Download">تحميل <i class="fas fa-download"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fab fa-windows"></i></div>
+                        <h4>Grammarly Desktop</h4>
+                        <p data-ar="تصحيح النصوص والكتابة الذكية" data-en="Smart text correction and writing">تصحيح النصوص والكتابة الذكية</p>
+                        <span class="tool-platform">Windows / Mac</span>
+                        <a href="https://www.grammarly.com/desktop" target="_blank" class="tool-link" data-ar="تحميل" data-en="Download">تحميل <i class="fas fa-download"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fab fa-windows"></i></div>
+                        <h4>Stable Diffusion Desktop</h4>
+                        <p data-ar="توليد صور بالذكاء الاصطناعي محلياً" data-en="Local AI image generation">توليد صور بالذكاء الاصطناعي محلياً</p>
+                        <span class="tool-platform">Windows / Mac / Linux</span>
+                        <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui" target="_blank" class="tool-link" data-ar="تحميل" data-en="Download">تحميل <i class="fas fa-download"></i></a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fab fa-windows"></i></div>
+                        <h4>Krisp AI</h4>
+                        <p data-ar="إزالة الضوضاء من الصوت بالذكاء الاصطناعي" data-en="AI-powered noise cancellation">إزالة الضوضاء من الصوت بالذكاء الاصطناعي</p>
+                        <span class="tool-platform">Windows / Mac</span>
+                        <a href="https://krisp.ai" target="_blank" class="tool-link" data-ar="تحميل" data-en="Download">تحميل <i class="fas fa-download"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Mobile Apps Section -->
-    <section id="mobile" class="tools-section">
+    <section class="section" id="mobile-apps">
         <div class="container">
-            <h2 class="section-title" data-en="Mobile Applications" data-ar="تطبيقات الجوال">Mobile Applications</h2>
-            
-            <div class="tools-grid" id="mobileGrid">
-                <!-- Mobile tools will be loaded dynamically from data/tools.json -->
+            <div class="section-header">
+                <h2 data-ar="تطبيقات الموبايل بالذكاء الاصطناعي" data-en="Mobile AI Applications">تطبيقات الموبايل بالذكاء الاصطناعي</h2>
+                <p data-ar="أفضل تطبيقات الذكاء الاصطناعي لأجهزة Android و iOS" data-en="Best AI apps for Android and iOS">أفضل تطبيقات الذكاء الاصطناعي لأجهزة Android و iOS</p>
+            </div>
+
+            <div class="apps-container">
+                <div class="category">
+                    <h3 class="category-title" data-ar="📱 تطبيقات Android & iOS" data-en="📱 Android & iOS Apps">📱 تطبيقات Android & iOS</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon"><i class="fab fa-android"></i></div>
+                            <h4>ChatGPT Mobile</h4>
+                            <p data-ar="تطبيق ChatGPT الرسمي" data-en="Official ChatGPT app">تطبيق ChatGPT الرسمي</p>
+                            <div class="app-buttons">
+                                <a href="https://play.google.com/store/apps/details?id=com.openai.chatgpt" target="_blank" class="app-btn android">
+                                    <i class="fab fa-google-play"></i> Google Play
+                                </a>
+                                <a href="https://apps.apple.com/app/openai-chatgpt/id6448311069" target="_blank" class="app-btn ios">
+                                    <i class="fab fa-app-store-ios"></i> App Store
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon"><i class="fab fa-android"></i></div>
+                            <h4>Google Gemini</h4>
+                            <p data-ar="مساعد Google الذكي" data-en="Google's AI assistant">مساعد Google الذكي</p>
+                            <div class="app-buttons">
+                                <a href="https://play.google.com" target="_blank" class="app-btn android">
+                                    <i class="fab fa-google-play"></i> Google Play
+                                </a>
+                                <a href="https://apps.apple.com" target="_blank" class="app-btn ios">
+                                    <i class="fab fa-app-store-ios"></i> App Store
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon"><i class="fab fa-android"></i></div>
+                            <h4>Microsoft Copilot</h4>
+                            <p data-ar="مساعد Microsoft الذكي" data-en="Microsoft's AI assistant">مساعد Microsoft الذكي</p>
+                            <div class="app-buttons">
+                                <a href="https://play.google.com" target="_blank" class="app-btn android">
+                                    <i class="fab fa-google-play"></i> Google Play
+                                </a>
+                                <a href="https://apps.apple.com" target="_blank" class="app-btn ios">
+                                    <i class="fab fa-app-store-ios"></i> App Store
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon"><i class="fas fa-camera"></i></div>
+                            <h4>Remini</h4>
+                            <p data-ar="تحسين جودة الصور القديمة" data-en="Enhance old photos quality">تحسين جودة الصور القديمة</p>
+                            <div class="app-buttons">
+                                <a href="https://play.google.com" target="_blank" class="app-btn android">
+                                    <i class="fab fa-google-play"></i> Google Play
+                                </a>
+                                <a href="https://apps.apple.com" target="_blank" class="app-btn ios">
+                                    <i class="fab fa-app-store-ios"></i> App Store
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon"><i class="fas fa-face-smile"></i></div>
+                            <h4>FaceApp</h4>
+                            <p data-ar="تحرير الوجه بالذكاء الاصطناعي" data-en="AI face editing">تحرير الوجه بالذكاء الاصطناعي</p>
+                            <div class="app-buttons">
+                                <a href="https://play.google.com" target="_blank" class="app-btn android">
+                                    <i class="fab fa-google-play"></i> Google Play
+                                </a>
+                                <a href="https://apps.apple.com" target="_blank" class="app-btn ios">
+                                    <i class="fab fa-app-store-ios"></i> App Store
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon"><i class="fas fa-language"></i></div>
+                            <h4>DeepL Translator</h4>
+                            <p data-ar="ترجمة دقيقة بالذكاء الاصطناعي" data-en="Accurate AI translation">ترجمة دقيقة بالذكاء الاصطناعي</p>
+                            <div class="app-buttons">
+                                <a href="https://play.google.com" target="_blank" class="app-btn android">
+                                    <i class="fab fa-google-play"></i> Google Play
+                                </a>
+                                <a href="https://apps.apple.com" target="_blank" class="app-btn ios">
+                                    <i class="fab fa-app-store-ios"></i> App Store
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon"><i class="fas fa-seedling"></i></div>
+                            <h4>Plantum</h4>
+                            <p data-ar="التعرف على النباتات بالذكاء الاصطناعي" data-en="AI plant identification">التعرف على النباتات بالذكاء الاصطناعي</p>
+                            <div class="app-buttons">
+                                <a href="https://play.google.com" target="_blank" class="app-btn android">
+                                    <i class="fab fa-google-play"></i> Google Play
+                                </a>
+                                <a href="https://apps.apple.com" target="_blank" class="app-btn ios">
+                                    <i class="fab fa-app-store-ios"></i> App Store
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon"><i class="fas fa-dumbbell"></i></div>
+                            <h4>FitnessAI</h4>
+                            <p data-ar="مدرب رياضي ذكي" data-en="Smart fitness trainer">مدرب رياضي ذكي</p>
+                            <div class="app-buttons">
+                                <a href="https://play.google.com" target="_blank" class="app-btn android">
+                                    <i class="fab fa-google-play"></i> Google Play
+                                </a>
+                                <a href="https://apps.apple.com" target="_blank" class="app-btn ios">
+                                    <i class="fab fa-app-store-ios"></i> App Store
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Chrome Extensions Section -->
-    <section id="extensions" class="tools-section alt-bg">
+    <!-- AI Models Section -->
+    <section class="section section-alt" id="ai-models">
         <div class="container">
-            <h2 class="section-title" data-en="Chrome Extensions" data-ar="إضافات كروم">Chrome Extensions</h2>
-            
-            <div class="tools-grid" id="extensionsGrid">
-                <!-- Extensions will be loaded dynamically from data/tools.json -->
+            <div class="section-header">
+                <h2 data-ar="نماذج الذكاء الاصطناعي المتقدمة" data-en="Advanced AI Models">نماذج الذكاء الاصطناعي المتقدمة</h2>
+                <p data-ar="أحدث وأقوى نماذج الذكاء الاصطناعي المتاحة" data-en="Latest and most powerful AI models available">أحدث وأقوى نماذج الذكاء الاصطناعي المتاحة</p>
+            </div>
+
+            <div class="models-grid">
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon"><i class="fas fa-brain"></i></div>
+                        <h3>GPT-4 Turbo</h3>
+                        <span class="model-badge">OpenAI</span>
+                    </div>
+                    <p data-ar="أقوى نموذج لغوي من OpenAI مع قدرات متقدمة" data-en="Most powerful language model from OpenAI">أقوى نموذج لغوي من OpenAI مع قدرات متقدمة</p>
+                    <ul class="model-features">
+                        <li data-ar="✓ تحليل نصوص متقدم" data-en="✓ Advanced text analysis">✓ تحليل نصوص متقدم</li>
+                        <li data-ar="✓ توليد محتوى ابداعي" data-en="✓ Creative content generation">✓ توليد محتوى ابداعي</li>
+                        <li data-ar="✓ معالجة الصور" data-en="✓ Image processing">✓ معالجة الصور</li>
+                    </ul>
+                    <a href="https://platform.openai.com" target="_blank" class="model-link" data-ar="استكشف النموذج" data-en="Explore Model">استكشف النموذج</a>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon"><i class="fas fa-robot"></i></div>
+                        <h3>Claude 3 Opus</h3>
+                        <span class="model-badge">Anthropic</span>
+                    </div>
+                    <p data-ar="نموذج متقدم للمحادثات والتحليل العميق" data-en="Advanced model for conversations and deep analysis">نموذج متقدم للمحادثات والتحليل العميق</p>
+                    <ul class="model-features">
+                        <li data-ar="✓ فهم سياقي متقدم" data-en="✓ Advanced contextual understanding">✓ فهم سياقي متقدم</li>
+                        <li data-ar="✓ تحليل معقد" data-en="✓ Complex analysis">✓ تحليل معقد</li>
+                        <li data-ar="✓ إجابات دقيقة" data-en="✓ Precise answers">✓ إجابات دقيقة</li>
+                    </ul>
+                    <a href="https://www.anthropic.com" target="_blank" class="model-link" data-ar="استكشف النموذج" data-en="Explore Model">استكشف النموذج</a>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon"><i class="fas fa-sparkles"></i></div>
+                        <h3>Gemini Ultra</h3>
+                        <span class="model-badge">Google</span>
+                    </div>
+                    <p data-ar="نموذج متعدد الوسائط من Google" data-en="Multimodal model from Google">نموذج متعدد الوسائط من Google</p>
+                    <ul class="model-features">
+                        <li data-ar="✓ معالجة متعددة الوسائط" data-en="✓ Multimodal processing">✓ معالجة متعددة الوسائط</li>
+                        <li data-ar="✓ فهم الصور والنصوص" data-en="✓ Image and text understanding">✓ فهم الصور والنصوص</li>
+                        <li data-ar="✓ أداء استثنائي" data-en="✓ Exceptional performance">✓ أداء استثنائي</li>
+                    </ul>
+                    <a href="https://deepmind.google/technologies/gemini" target="_blank" class="model-link" data-ar="استكشف النموذج" data-en="Explore Model">استكشف النموذج</a>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon"><i class="fas fa-code"></i></div>
+                        <h3>Llama 3</h3>
+                        <span class="model-badge">Meta</span>
+                    </div>
+                    <p data-ar="نموذج مفتوح المصدر من Meta" data-en="Open-source model from Meta">نموذج مفتوح المصدر من Meta</p>
+                    <ul class="model-features">
+                        <li data-ar="✓ مفتوح المصدر" data-en="✓ Open source">✓ مفتوح المصدر</li>
+                        <li data-ar="✓ قابل للتخصيص" data-en="✓ Customizable">✓ قابل للتخصيص</li>
+                        <li data-ar="✓ أداء ممتاز" data-en="✓ Excellent performance">✓ أداء ممتاز</li>
+                    </ul>
+                    <a href="https://llama.meta.com" target="_blank" class="model-link" data-ar="استكشف النموذج" data-en="Explore Model">استكشف النموذج</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="section" id="resources">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-ar="مصادر تعليمية وأدلة شاملة" data-en="Educational Resources & Guides">مصادر تعليمية وأدلة شاملة</h2>
+                <p data-ar="تعلم كل شيء عن الذكاء الاصطناعي من الصفر" data-en="Learn everything about AI from scratch">تعلم كل شيء عن الذكاء الاصطناعي من الصفر</p>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-book"></i></div>
+                    <h3 data-ar="دورات تعليمية" data-en="Online Courses">دورات تعليمية</h3>
+                    <ul class="resource-list">
+                        <li><a href="https://www.coursera.org/learn/machine-learning" target="_blank">Machine Learning - Coursera</a></li>
+                        <li><a href="https://www.deeplearning.ai" target="_blank">Deep Learning Specialization</a></li>
+                        <li><a href="https://www.fast.ai" target="_blank">Practical Deep Learning - Fast.ai</a></li>
+                        <li><a href="https://www.udacity.com/course/intro-to-artificial-intelligence--cs271" target="_blank">Intro to AI - Udacity</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 data-ar="كتب ومراجع" data-en="Books & References">كتب ومراجع</h3>
+                    <ul class="resource-list">
+                        <li><a href="https://www.deeplearningbook.org" target="_blank">Deep Learning Book</a></li>
+                        <li><a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/" target="_blank">Hands-On Machine Learning</a></li>
+                        <li><a href="https://www.manning.com/books/deep-learning-with-python" target="_blank">Deep Learning with Python</a></li>
+                        <li><a href="https://github.com/aima-notes/aima-notes.github.io" target="_blank">AI: A Modern Approach</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-video"></i></div>
+                    <h3 data-ar="قنوات يوتيوب" data-en="YouTube Channels">قنوات يوتيوب</h3>
+                    <ul class="resource-list">
+                        <li><a href="https://www.youtube.com/@3blue1brown" target="_blank">3Blue1Brown</a></li>
+                        <li><a href="https://www.youtube.com/@sentdex" target="_blank">Sentdex</a></li>
+                        <li><a href="https://www.youtube.com/@lexfridman" target="_blank">Lex Fridman</a></li>
+                        <li><a href="https://www.youtube.com/@TwoMinutePapers" target="_blank">Two Minute Papers</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-newspaper"></i></div>
+                    <h3 data-ar="مدونات ومقالات" data-en="Blogs & Articles">مدونات ومقالات</h3>
+                    <ul class="resource-list">
+                        <li><a href="https://openai.com/blog" target="_blank">OpenAI Blog</a></li>
+                        <li><a href="https://ai.googleblog.com" target="_blank">Google AI Blog</a></li>
+                        <li><a href="https://www.anthropic.com/news" target="_blank">Anthropic News</a></li>
+                        <li><a href="https://huggingface.co/blog" target="_blank">Hugging Face Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-code"></i></div>
+                    <h3 data-ar="أدوات المطورين" data-en="Developer Tools">أدوات المطورين</h3>
+                    <ul class="resource-list">
+                        <li><a href="https://huggingface.co" target="_blank">Hugging Face</a></li>
+                        <li><a href="https://github.com/openai" target="_blank">OpenAI GitHub</a></li>
+                        <li><a href="https://www.tensorflow.org" target="_blank">TensorFlow</a></li>
+                        <li><a href="https://pytorch.org" target="_blank">PyTorch</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-users"></i></div>
+                    <h3 data-ar="مجتمعات ومنتديات" data-en="Communities & Forums">مجتمعات ومنتديات</h3>
+                    <ul class="resource-list">
+                        <li><a href="https://www.reddit.com/r/MachineLearning/" target="_blank">r/MachineLearning</a></li>
+                        <li><a href="https://www.kaggle.com" target="_blank">Kaggle Community</a></li>
+                        <li><a href="https://discord.gg/openai" target="_blank">OpenAI Discord</a></li>
+                        <li><a href="https://stackoverflow.com/questions/tagged/artificial-intelligence" target="_blank">Stack Overflow AI</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -154,72 +639,64 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
+            <div class="footer-content">
+                <div class="footer-section">
                     <div class="footer-logo">
                         <i class="fas fa-brain"></i>
-                        <span data-en="AI Tools Hub" data-ar="مركز أدوات الذكاء الاصطناعي">AI Tools Hub</span>
+                        <span data-ar="مركز أدوات الذكاء الاصطناعي" data-en="AI Tools Hub">مركز أدوات الذكاء الاصطناعي</span>
                     </div>
-                    <p class="footer-desc" data-en="Your comprehensive guide to the world of artificial intelligence tools" data-ar="دليلك الشامل لعالم أدوات الذكاء الاصطناعي">Your comprehensive guide to the world of artificial intelligence tools</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <p data-ar="دليلك الشامل لأفضل أدوات وتطبيقات الذكاء الاصطناعي في العالم" data-en="Your complete guide to the best AI tools and applications in the world">دليلك الشامل لأفضل أدوات وتطبيقات الذكاء الاصطناعي في العالم</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
-                
-                <div class="footer-column">
-                    <h4 data-en="Quick Links" data-ar="روابط سريعة">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="#online" data-en="Online Tools" data-ar="أدوات أونلاين">Online Tools</a></li>
-                        <li><a href="#desktop" data-en="Desktop Apps" data-ar="تطبيقات سطح المكتب">Desktop Apps</a></li>
-                        <li><a href="#mobile" data-en="Mobile Apps" data-ar="تطبيقات الجوال">Mobile Apps</a></li>
-                        <li><a href="#extensions" data-en="Extensions" data-ar="الإضافات">Extensions</a></li>
+
+                <div class="footer-section">
+                    <h4 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                        <li><a href="#web-tools" data-ar="أدوات الويب" data-en="Web Tools">أدوات الويب</a></li>
+                        <li><a href="#desktop-apps" data-ar="برامج الكمبيوتر" data-en="Desktop Apps">برامج الكمبيوتر</a></li>
+                        <li><a href="#mobile-apps" data-ar="تطبيقات الموبايل" data-en="Mobile Apps">تطبيقات الموبايل</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-column">
-                    <h4 data-en="Categories" data-ar="التصنيفات">Categories</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" data-en="Text Generation" data-ar="توليد النصوص">Text Generation</a></li>
-                        <li><a href="#" data-en="Image Creation" data-ar="إنشاء الصور">Image Creation</a></li>
-                        <li><a href="#" data-en="Video Editing" data-ar="تحرير الفيديو">Video Editing</a></li>
-                        <li><a href="#" data-en="Audio Processing" data-ar="معالجة الصوت">Audio Processing</a></li>
+
+                <div class="footer-section">
+                    <h4 data-ar="الفئات" data-en="Categories">الفئات</h4>
+                    <ul>
+                        <li><a href="#web-tools" data-ar="توليد النصوص" data-en="Text Generation">توليد النصوص</a></li>
+                        <li><a href="#web-tools" data-ar="توليد الصور" data-en="Image Generation">توليد الصور</a></li>
+                        <li><a href="#web-tools" data-ar="توليد الفيديو" data-en="Video Generation">توليد الفيديو</a></li>
+                        <li><a href="#web-tools" data-ar="البرمجة" data-en="Programming">البرمجة</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-column">
-                    <h4 data-en="Resources" data-ar="الموارد">Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" data-en="About Us" data-ar="من نحن">About Us</a></li>
-                        <li><a href="#" data-en="Blog" data-ar="المدونة">Blog</a></li>
-                        <li><a href="#" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
-                        <li><a href="#" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a></li>
+
+                <div class="footer-section">
+                    <h4 data-ar="معلومات" data-en="Information">معلومات</h4>
+                    <ul>
+                        <li><a href="#" data-ar="من نحن" data-en="About Us">من نحن</a></li>
+                        <li><a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy">سياسة الخصوصية</a></li>
+                        <li><a href="#" data-ar="شروط الاستخدام" data-en="Terms of Use">شروط الاستخدام</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                <p>
-                    &copy; 2025 AI Tools Hub. <span data-en="All rights reserved" data-ar="جميع الحقوق محفوظة">All rights reserved</span>.
-                </p>
-                <p class="footer-credit">
-                    <span data-en="Designed & Developed by" data-ar="تصميم وتطوير">Designed & Developed by</span>
-                    <a href="https://anon-site.github.io/" target="_blank" rel="noopener noreferrer" class="developer-link">
-                        <i class="fas fa-code"></i> Anon Design
-                    </a>
-                </p>
+                <p>&copy; 2024 <span data-ar="مركز أدوات الذكاء الاصطناعي" data-en="AI Tools Hub">مركز أدوات الذكاء الاصطناعي</span>. <span data-ar="جميع الحقوق محفوظة" data-en="All rights reserved">جميع الحقوق محفوظة</span>.</p>
+                <p data-ar="صنع بـ ❤️ لمجتمع الذكاء الاصطناعي" data-en="Made with ❤️ for the AI community">صنع بـ ❤️ لمجتمع الذكاء الاصطناعي</p>
             </div>
         </div>
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+    <button class="scroll-top" id="scrollTop">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Defer JavaScript for faster page load -->
-    <script src="script.js" defer></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
