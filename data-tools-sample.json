@@ -1,0 +1,80 @@
+{
+  "online": [
+    {
+      "name": "ChatGPT",
+      "descriptionEn": "Advanced conversational AI by OpenAI for natural language understanding and generation",
+      "descriptionAr": "ذكاء اصطناعي محادثة متقدم من OpenAI لفهم وتوليد اللغة الطبيعية",
+      "url": "https://chat.openai.com",
+      "category": "text",
+      "pricing": "freemium",
+      "badge": "popular",
+      "iconClass": "fas fa-comment-dots",
+      "iconGradient": "linear-gradient(135deg, #10a37f, #1a7f64)",
+      "featuresEn": ["Chat", "Writing", "Code"],
+      "featuresAr": ["محادثة", "كتابة", "برمجة"],
+      "platforms": []
+    },
+    {
+      "name": "Midjourney",
+      "descriptionEn": "Create stunning AI-generated artwork and images from text descriptions",
+      "descriptionAr": "أنشئ أعمالاً فنية وصوراً مذهلة بالذكاء الاصطناعي من وصف نصي",
+      "url": "https://www.midjourney.com",
+      "category": "image",
+      "pricing": "paid",
+      "badge": "premium",
+      "iconClass": "fas fa-palette",
+      "iconGradient": "linear-gradient(135deg, #4a90e2, #357abd)",
+      "featuresEn": ["Art", "Design", "Creative"],
+      "featuresAr": ["فن", "تصميم", "إبداع"],
+      "platforms": []
+    }
+  ],
+  "desktop": [
+    {
+      "name": "GitHub Copilot",
+      "descriptionEn": "AI-powered code completion tool integrated with popular IDEs",
+      "descriptionAr": "أداة إكمال الكود بالذكاء الاصطناعي متكاملة مع بيئات التطوير الشهيرة",
+      "url": "https://github.com/features/copilot",
+      "category": "",
+      "pricing": "paid",
+      "badge": "popular",
+      "iconClass": "fas fa-code",
+      "iconGradient": "linear-gradient(135deg, #24292e, #0366d6)",
+      "featuresEn": ["Coding", "VS Code"],
+      "featuresAr": ["برمجة", "VS Code"],
+      "platforms": ["windows", "mac", "linux"]
+    }
+  ],
+  "mobile": [
+    {
+      "name": "ChatGPT Mobile",
+      "descriptionEn": "Official ChatGPT app with voice input and conversation history sync",
+      "descriptionAr": "تطبيق ChatGPT الرسمي مع إدخال صوتي ومزامنة سجل المحادثات",
+      "url": "https://openai.com/chatgpt/mobile",
+      "category": "",
+      "pricing": "freemium",
+      "badge": "popular",
+      "iconClass": "fas fa-mobile-alt",
+      "iconGradient": "linear-gradient(135deg, #10a37f, #1a7f64)",
+      "featuresEn": ["Chat", "Voice"],
+      "featuresAr": ["محادثة", "صوت"],
+      "platforms": ["android", "ios"]
+    }
+  ],
+  "extensions": [
+    {
+      "name": "Grammarly",
+      "descriptionEn": "AI writing assistant for grammar, spelling, and style improvement",
+      "descriptionAr": "مساعد كتابة ذكي للقواعد والإملاء وتحسين الأسلوب",
+      "url": "https://chrome.google.com/webstore",
+      "category": "",
+      "pricing": "freemium",
+      "badge": "popular",
+      "iconClass": "fas fa-spell-check",
+      "iconGradient": "linear-gradient(135deg, #15c39a, #11a581)",
+      "featuresEn": ["Writing", "Grammar"],
+      "featuresAr": ["كتابة", "قواعد"],
+      "platforms": []
+    }
+  ]
+}

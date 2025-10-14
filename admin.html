@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - AI Tools Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-cog"></i>
+                    <span class="logo-text">Admin Panel</span>
+                </div>
+                
+                <div class="admin-nav">
+                    <a href="index.html" class="btn-secondary">
+                        <i class="fas fa-home"></i>
+                        <span>Back to Site</span>
+                    </a>
+                    <button class="lang-toggle" id="adminLangToggle">
+                        <i class="fas fa-language"></i>
+                        <span id="adminLangText">العربية</span>
+                    </button>
+                    <button class="btn-sync" id="syncButton" title="Sync with GitHub">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-menu">
+                <h3 data-en="Manage Tools" data-ar="إدارة الأدوات">Manage Tools</h3>
+                <button class="menu-item active" data-section="online" data-en="Online Tools" data-ar="أدوات أونلاين">
+                    <i class="fas fa-globe"></i>
+                    <span>Online Tools</span>
+                </button>
+                <button class="menu-item" data-section="desktop" data-en="Desktop Apps" data-ar="تطبيقات سطح المكتب">
+                    <i class="fas fa-desktop"></i>
+                    <span>Desktop Apps</span>
+                </button>
+                <button class="menu-item" data-section="mobile" data-en="Mobile Apps" data-ar="تطبيقات الجوال">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile Apps</span>
+                </button>
+                <button class="menu-item" data-section="extensions" data-en="Extensions" data-ar="الإضافات">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <span>Extensions</span>
+                </button>
+            </div>
+
+            <div class="sidebar-actions">
+                <button class="btn-export" id="exportData">
+                    <i class="fas fa-download"></i>
+                    <span data-en="Export Data" data-ar="تصدير البيانات">Export Data</span>
+                </button>
+                <button class="btn-import" id="importDataBtn">
+                    <i class="fas fa-upload"></i>
+                    <span data-en="Import Data" data-ar="استيراد البيانات">Import Data</span>
+                </button>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+                
+                <div class="github-status">
+                    <i class="fab fa-github"></i>
+                    <span id="githubStatus" data-en="Not Connected" data-ar="غير متصل">Not Connected</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Stats Overview -->
+            <div class="admin-stats">
+                <div class="stat-box">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4 data-en="Online Tools" data-ar="أدوات أونلاين">Online Tools</h4>
+                        <p class="stat-count" id="onlineCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4 data-en="Desktop Apps" data-ar="تطبيقات سطح المكتب">Desktop Apps</h4>
+                        <p class="stat-count" id="desktopCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4 data-en="Mobile Apps" data-ar="تطبيقات الجوال">Mobile Apps</h4>
+                        <p class="stat-count" id="mobileCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4 data-en="Extensions" data-ar="الإضافات">Extensions</h4>
+                        <p class="stat-count" id="extensionsCount">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <button class="btn-primary" id="addNewTool">
+                    <i class="fas fa-plus"></i>
+                    <span data-en="Add New Tool" data-ar="إضافة أداة جديدة">Add New Tool</span>
+                </button>
+                <div class="search-filter">
+                    <input type="text" id="adminSearch" placeholder="Search tools..." data-placeholder-en="Search tools..." data-placeholder-ar="ابحث عن الأدوات...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <!-- Tools Table -->
+            <div class="tools-table-container">
+                <table class="tools-table">
+                    <thead>
+                        <tr>
+                            <th data-en="Icon" data-ar="الأيقونة">Icon</th>
+                            <th data-en="Name" data-ar="الاسم">Name</th>
+                            <th data-en="Description" data-ar="الوصف">Description</th>
+                            <th data-en="Category" data-ar="التصنيف">Category</th>
+                            <th data-en="Pricing" data-ar="السعر">Pricing</th>
+                            <th data-en="Actions" data-ar="الإجراءات">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="toolsTableBody">
+                        <tr>
+                            <td colspan="6" class="loading-cell">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <span data-en="Loading tools..." data-ar="جاري تحميل الأدوات...">Loading tools...</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Tool Modal -->
+    <div class="modal" id="toolModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle" data-en="Add New Tool" data-ar="إضافة أداة جديدة">Add New Tool</h2>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="toolForm" class="tool-form">
+                <input type="hidden" id="toolId">
+                <input type="hidden" id="editIndex">
+
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h3 data-en="Basic Information" data-ar="المعلومات الأساسية">Basic Information</h3>
+                    
+                    <div class="form-group">
+                        <label data-en="Tool Name" data-ar="اسم الأداة">Tool Name *</label>
+                        <input type="text" id="toolName" required placeholder="e.g., ChatGPT">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-en="Description (English)" data-ar="الوصف (إنجليزي)">Description (English) *</label>
+                            <textarea id="descriptionEn" required rows="3" placeholder="Tool description in English"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label data-en="Description (Arabic)" data-ar="الوصف (عربي)">Description (Arabic) *</label>
+                            <textarea id="descriptionAr" required rows="3" placeholder="وصف الأداة بالعربية"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="Website URL" data-ar="رابط الموقع">Website URL *</label>
+                        <input type="url" id="toolUrl" required placeholder="https://example.com">
+                    </div>
+                </div>
+
+                <!-- Categorization -->
+                <div class="form-section">
+                    <h3 data-en="Categorization" data-ar="التصنيف">Categorization</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-en="Section" data-ar="القسم">Section *</label>
+                            <select id="sectionSelect" required>
+                                <option value="online">Online Tools</option>
+                                <option value="desktop">Desktop Apps</option>
+                                <option value="mobile">Mobile Apps</option>
+                                <option value="extensions">Extensions</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="categoryGroup">
+                            <label data-en="Category (For Online Tools)" data-ar="الفئة (للأدوات الأونلاين)">Category</label>
+                            <select id="categorySelect">
+                                <option value="">None</option>
+                                <option value="text">Text Generation</option>
+                                <option value="image">Image Creation</option>
+                                <option value="video">Video Editing</option>
+                                <option value="audio">Audio Processing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-en="Pricing" data-ar="التسعير">Pricing *</label>
+                            <select id="pricingSelect" required>
+                                <option value="free">Free</option>
+                                <option value="freemium">Free + Paid</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-en="Badge" data-ar="الشارة">Badge</label>
+                            <select id="badgeSelect">
+                                <option value="">None</option>
+                                <option value="popular">Popular</option>
+                                <option value="new">New</option>
+                                <option value="premium">Premium</option>
+                                <option value="trending">Trending</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Styling -->
+                <div class="form-section">
+                    <h3 data-en="Visual Styling" data-ar="التصميم المرئي">Visual Styling</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-en="Icon Class" data-ar="فئة الأيقونة">Icon Class (FontAwesome) *</label>
+                            <input type="text" id="iconClass" required placeholder="fas fa-robot">
+                            <small>Example: fas fa-robot, fas fa-code, fas fa-image</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-en="Icon Background" data-ar="خلفية الأيقونة">Icon Background *</label>
+                            <input type="text" id="iconGradient" required placeholder="linear-gradient(135deg, #667eea, #764ba2)">
+                            <small>CSS gradient or color</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="form-section">
+                    <h3 data-en="Features" data-ar="المميزات">Features</h3>
+                    
+                    <div class="form-group">
+                        <label data-en="Feature Tags (English)" data-ar="علامات المميزات (إنجليزي)">Feature Tags (English)</label>
+                        <input type="text" id="featuresEn" placeholder="Chat, Writing, Code">
+                        <small>Separate multiple features with commas</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="Feature Tags (Arabic)" data-ar="علامات المميزات (عربي)">Feature Tags (Arabic)</label>
+                        <input type="text" id="featuresAr" placeholder="محادثة, كتابة, برمجة">
+                        <small>افصل المميزات بفواصل</small>
+                    </div>
+                </div>
+
+                <!-- Platforms (for Desktop/Mobile) -->
+                <div class="form-section" id="platformsSection">
+                    <h3 data-en="Supported Platforms" data-ar="المنصات المدعومة">Supported Platforms</h3>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="platforms" value="windows">
+                            <span><i class="fab fa-windows"></i> Windows</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="platforms" value="mac">
+                            <span><i class="fab fa-apple"></i> macOS</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="platforms" value="linux">
+                            <span><i class="fab fa-linux"></i> Linux</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="platforms" value="android">
+                            <span><i class="fab fa-android"></i> Android</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="platforms" value="ios">
+                            <span><i class="fab fa-apple"></i> iOS</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i>
+                        <span data-en="Save Tool" data-ar="حفظ الأداة">Save Tool</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2 data-en="Confirm Delete" data-ar="تأكيد الحذف">Confirm Delete</h2>
+                <button class="modal-close" id="closeDeleteModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p data-en="Are you sure you want to delete this tool?" data-ar="هل أنت متأكد من حذف هذه الأداة؟">
+                        Are you sure you want to delete this tool?
+                    </p>
+                    <p class="tool-name-display" id="deleteToolName"></p>
+                    <p class="warning-text" data-en="This action cannot be undone." data-ar="لا يمكن التراجع عن هذا الإجراء.">
+                        This action cannot be undone.
+                    </p>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="cancelDelete">Cancel</button>
+                <button type="button" class="btn-danger" id="confirmDelete">
+                    <i class="fas fa-trash"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub Settings Modal -->
+    <div class="modal" id="githubModal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>GitHub Settings</h2>
+                <button class="modal-close" id="closeGithubModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>GitHub Repository Owner</label>
+                    <input type="text" id="githubOwner" placeholder="username">
+                </div>
+                <div class="form-group">
+                    <label>GitHub Repository Name</label>
+                    <input type="text" id="githubRepo" placeholder="ai-tools">
+                </div>
+                <div class="form-group">
+                    <label>GitHub Personal Access Token</label>
+                    <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+                    <small>Requires repo permissions</small>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="cancelGithub">Cancel</button>
+                <button type="button" class="btn-primary" id="saveGithub">
+                    <i class="fab fa-github"></i>
+                    Connect
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="toastMessage">Success!</span>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p id="loadingText">Processing...</p>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
