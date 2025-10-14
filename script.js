@@ -154,11 +154,25 @@ function initMobileMenu() {
     const navLinks = document.querySelector('.nav-links');
     
     if (mobileMenuToggle) {
+        // Toggle menu when clicking the hamburger button
         mobileMenuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('mobile-active');
             const icon = mobileMenuToggle.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
+        });
+        
+        // Close menu when clicking on any navigation link
+        const navLinkItems = navLinks.querySelectorAll('a');
+        navLinkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                // Close the mobile menu
+                navLinks.classList.remove('mobile-active');
+                // Change icon back to hamburger
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
         });
     }
 }
