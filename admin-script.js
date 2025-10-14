@@ -46,10 +46,17 @@ function showGithubModal() {
     const modal = document.getElementById('githubModal');
     modal.classList.add('active');
     
-    // Populate fields
-    document.getElementById('githubOwner').value = githubConfig.owner || '';
-    document.getElementById('githubRepo').value = githubConfig.repo || '';
+    // Populate token field
     document.getElementById('githubToken').value = githubConfig.token || '';
+    
+    // Show detected repo info if available
+    if (githubConfig.owner && githubConfig.repo) {
+        document.getElementById('detectedOwner').textContent = githubConfig.owner;
+        document.getElementById('detectedRepo').textContent = githubConfig.repo;
+        document.getElementById('repoInfo').style.display = 'block';
+    } else {
+        document.getElementById('repoInfo').style.display = 'none';
+    }
 }
 
 function updateGithubStatus(connected) {
@@ -70,6 +77,85 @@ function updateGithubStatus(connected) {
 }
 
 // ===== GitHub API Functions =====
+async function detectRepositoryFromToken(token) {
+    // Get user info to find repo
+    try {
+        // First, get user's username
+        const userResponse = await fetch('https://api.github.com/user', {
+            headers: {
+                'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        if (!userResponse.ok) {
+            throw new Error('Invalid token or insufficient permissions');
+        }
+        
+        const userData = await userResponse.json();
+        const username = userData.login;
+        
+        // Get user's repositories
+        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`, {
+            headers: {
+                'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        if (!reposResponse.ok) {
+            throw new Error('Failed to fetch repositories');
+        }
+        
+        const repos = await reposResponse.json();
+        
+        // Try to find ai-tools repo or similar
+        let targetRepo = repos.find(r => r.name.toLowerCase() === 'ai-tools');
+        
+        // If not found, try to find repo with data/tools.json
+        if (!targetRepo) {
+            for (const repo of repos) {
+                try {
+                    const contentResponse = await fetch(
+                        `https://api.github.com/repos/${repo.owner.login}/${repo.name}/contents/data/tools.json`,
+                        {
+                            headers: {
+                                'Authorization': `token ${token}`,
+                                'Accept': 'application/vnd.github.v3+json'
+                            }
+                        }
+                    );
+                    
+                    if (contentResponse.ok) {
+                        targetRepo = repo;
+                        break;
+                    }
+                } catch (e) {
+                    // Continue searching
+                }
+            }
+        }
+        
+        // If still not found, use the most recently updated repo
+        if (!targetRepo && repos.length > 0) {
+            targetRepo = repos[0];
+        }
+        
+        if (targetRepo) {
+            return {
+                owner: targetRepo.owner.login,
+                repo: targetRepo.name
+            };
+        } else {
+            throw new Error('No repositories found');
+        }
+        
+    } catch (error) {
+        console.error('Repository detection failed:', error);
+        throw error;
+    }
+}
+
 async function githubRequest(endpoint, method = 'GET', data = null) {
     const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/${endpoint}`;
     
@@ -591,21 +677,95 @@ function initializeEventListeners() {
     
     // GitHub modal
     document.getElementById('syncButton').addEventListener('click', showGithubModal);
-    document.getElementById('saveGithub').addEventListener('click', () => {
-        githubConfig.owner = document.getElementById('githubOwner').value;
-        githubConfig.repo = document.getElementById('githubRepo').value;
-        githubConfig.token = document.getElementById('githubToken').value;
+    
+    // Auto-detect repository when token is entered
+    let detectionTimeout;
+    document.getElementById('githubToken').addEventListener('input', async (e) => {
+        const token = e.target.value.trim();
+        const tokenInput = e.target;
         
-        if (githubConfig.owner && githubConfig.repo && githubConfig.token) {
-            saveGithubConfig();
-            updateGithubStatus(true);
-            closeGithubModal();
-            loadToolsData();
-            showToast('GitHub connected successfully', 'success');
+        // Clear previous timeout
+        if (detectionTimeout) {
+            clearTimeout(detectionTimeout);
+        }
+        
+        // Only try to detect if token looks valid (starts with ghp_ or github_pat_)
+        if (token.length > 20 && (token.startsWith('ghp_') || token.startsWith('github_pat_'))) {
+            // Add detecting class for animation
+            tokenInput.classList.add('detecting');
+            
+            // Debounce detection by 800ms
+            detectionTimeout = setTimeout(async () => {
+                try {
+                    showLoading('Detecting repository...');
+                    const repoInfo = await detectRepositoryFromToken(token);
+                    
+                    // Update UI to show detected repo
+                    document.getElementById('detectedOwner').textContent = repoInfo.owner;
+                    document.getElementById('detectedRepo').textContent = repoInfo.repo;
+                    document.getElementById('repoInfo').style.display = 'block';
+                    
+                    // Store temporarily (will be saved on Connect button)
+                    githubConfig.owner = repoInfo.owner;
+                    githubConfig.repo = repoInfo.repo;
+                    githubConfig.token = token;
+                    
+                    tokenInput.classList.remove('detecting');
+                    hideLoading();
+                    showToast('Repository detected successfully!', 'success');
+                } catch (error) {
+                    tokenInput.classList.remove('detecting');
+                    hideLoading();
+                    document.getElementById('repoInfo').style.display = 'none';
+                    console.error('Auto-detection failed:', error);
+                    // Only show error if it's not just a network issue
+                    if (!error.message.includes('fetch')) {
+                        showToast('Unable to auto-detect repository', 'error');
+                    }
+                }
+            }, 800);
         } else {
-            showToast('Please fill all fields', 'error');
+            // Hide repo info if token is cleared or invalid
+            tokenInput.classList.remove('detecting');
+            document.getElementById('repoInfo').style.display = 'none';
         }
     });
+    
+    document.getElementById('saveGithub').addEventListener('click', async () => {
+        const token = document.getElementById('githubToken').value.trim();
+        
+        if (!token) {
+            showToast('Please enter GitHub token', 'error');
+            return;
+        }
+        
+        try {
+            // If repo not detected yet, try to detect it
+            if (!githubConfig.owner || !githubConfig.repo) {
+                showLoading('Detecting repository...');
+                const repoInfo = await detectRepositoryFromToken(token);
+                githubConfig.owner = repoInfo.owner;
+                githubConfig.repo = repoInfo.repo;
+                githubConfig.token = token;
+            }
+            
+            if (githubConfig.owner && githubConfig.repo && githubConfig.token) {
+                saveGithubConfig();
+                updateGithubStatus(true);
+                closeGithubModal();
+                hideLoading();
+                loadToolsData();
+                showToast('GitHub connected successfully', 'success');
+            } else {
+                hideLoading();
+                showToast('Failed to detect repository', 'error');
+            }
+        } catch (error) {
+            hideLoading();
+            showToast('Connection failed: ' + error.message, 'error');
+        }
+    });
+    
     document.getElementById('cancelGithub').addEventListener('click', closeGithubModal);
     document.getElementById('closeGithubModal').addEventListener('click', closeGithubModal);
     
